@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>“记忆难？试试这套方法</title>
+      <link href="/year/05/c6465174ecd6.html"/>
+      <url>/year/05/c6465174ecd6.html</url>
+      
+        <content type="html"><![CDATA[<p>面对一段又一段冗长的文字，究竟如何记忆？（一个传统工科生的自白</p><p>我自认为不是一个记忆力特别好的人，可有时又会面临一些不得不记的情况，倘若你也有我类似的情况，不妨往下看看，希望能启发你一点灵感 ~</p><p>或许，我已找到了适合我的记忆方法，即采取组块化 + 联系具象化 + 间隔测试的记忆方法，用于辅助自己快速记忆。</p><h1 id="组块化"><a href="#组块化" class="headerlink" title="组块化"></a>组块化</h1><h2 id="何谓组块化？"><a href="#何谓组块化？" class="headerlink" title="何谓组块化？"></a>何谓组块化？</h2><p>组块化，实际上就是将一段话的核心关键词提炼出来。</p><p>比如：</p><blockquote><p>组块化前：具有较高的政治素质和坚定的理想信念，坚决贯彻执行党的基本路线和各项方针政策，有较强的政治敏感性和政治辨别力。</p></blockquote><blockquote><p>组块化后：政治素质、理想信念、基本路线、方针政策、政治敏感性、政治辨别力</p></blockquote><h2 id="为何组块化？"><a href="#为何组块化？" class="headerlink" title="为何组块化？"></a>为何组块化？</h2><p>组块化后，提炼出关键词，再抓到这些关键词之间的关系，再进行记忆，能够有效提升记忆的质量。</p><h2 id="如何组块化？"><a href="#如何组块化？" class="headerlink" title="如何组块化？"></a>如何组块化？</h2><p>诚然，通过人为主动识别句子的关键短语是可行的，但是，能否把这个过程用自动化来辅助，提高效率呢？</p><p>我采取的是，python中的 <code>thulac</code> 库进行分词，这是由清华大学自然语言处理与社会人文计算实验室开发的中文词法分析工具，会比常见的 <code>jieba</code> 库的分词效果更为出色、理想。</p><p>同时在Obsidian的白板（canvas）上进行呈现。</p><p>比如：</p><blockquote><p>同样的例子：具有较高的政治素质和坚定的理想信念，坚决贯彻执行党的基本路线和各项方针政策，有较强的政治敏感性和政治辨别力。</p></blockquote><blockquote><p>自动化分词后：政治素质、理想信念、坚决贯彻执行党、基本路线、方针政策、政治敏感性、政治辨别力。</p></blockquote><p>可以看出，跟我们想要的效果是较为接近的，当然有时需要我们人为调整，下面是效果GIF：</p><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/111.gif"/><h1 id="联系具象化"><a href="#联系具象化" class="headerlink" title="联系具象化"></a>联系具象化</h1><blockquote><p>任何知识和信息都无法在完全孤立的状态下发挥作用，也无法在完全孤立的状态下根植到我们的记忆中。也就是说，我们必须把新的知识和自己已有的知识建立联系，否则别说是理解，就连单纯的记忆都十分困难。</p></blockquote><p>往往识别出关键词+句子逻辑关系就可以快速理解一个句子的含义，同理，想快速记住一个句子，我个人的习惯是，识别出其中的关键词，再将关键词彼此建立联系。</p><p>关键词的识别，就是上文我们提到的组块化的思想，通过自动化让其自动拆分，提取出关键词（积木），置于白板中。</p><p>而建立联系的方式就好似搭建出“新旧”链接，将联系具象化。我采取的借用Obsidian的白板（canvas）功能，自由的搭建这些“积木”，如下图：</p><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/20230522105400.png"/><h1 id="间隔式测试"><a href="#间隔式测试" class="headerlink" title="间隔式测试"></a>间隔式测试</h1><p>通过组块化与联系的具象化，确实可以辅助记忆，但是时间一久，不免会遗忘。为此，我们离不开间隔式测试，顾名思义，两个关键点，间隔式、测试。</p><h2 id="间隔式"><a href="#间隔式" class="headerlink" title="间隔式"></a>间隔式</h2><p>事实上，遗忘是正常的，我们也无需担心遗忘。我们常听到要结合艾宾浩斯遗忘曲线来进行记忆，这实际上也是一种间隔式的记忆。</p><p>而记忆工具大家听得比较多的可能是Anki，除此之外，还有一个工具，Supermemo18（下文简称SM18），更多关于SM18的知识可以参考 <a href="https://www.zhihu.com/column/c_1308886122672484352">SuperMemo—渐进学习最前沿！ - 知乎 (zhihu.com)</a></p><p>其二者核心差异如下：</p><ul><li>anki：界面友好；记忆算法采用SM2；多平台；核心功能是记忆卡片；</li><li>SM18：界面一般；记忆算法采用SM18；仅win平台；除了卡片记忆还支持渐进式阅读。</li></ul><p>可以看出，就其记忆曲线而言，SM18会先进不少，因此，结合我的个人需求，我的记忆曲线借用的是SM18这个工具。</p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>光是间隔的重复，实际上未必能达到足够好的效果，应结合测试。即，通过问题，主动去回忆答案。</p><p>补充说明一下，除了借用到SM18的记忆曲线以外，为何我不直接在SM18中进行挖空，主要有两点原因：</p><ol><li>SM18这个工具最为出色的就是它的记忆曲线，对我来说，用到某个工具的核心功能就已足够；</li><li>需要挖空的地方较多，使用上并不便利，我更需要的是能够随机遮蔽抽测的效果，达成这一需求，会使得我大多的精力耗费在SM18的制卡上。</li></ol><p>而我采用的方案是：直接在OB白板上进行随机遮蔽，下面是效果GIF：</p><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/222.gif"/><h2 id="OB与SM18的交互"><a href="#OB与SM18的交互" class="headerlink" title="OB与SM18的交互"></a>OB与SM18的交互</h2><p>最后，还有一个问题，如何较为便利的借助SM18的记忆曲线呢？即，如何使得 OB to SM18，以及SM18 to OB，这边我采用的是quicker动作，快速制卡。</p><h3 id="OB-to-SM18"><a href="#OB-to-SM18" class="headerlink" title="OB to SM18"></a>OB to SM18</h3><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/33.gif"/><h3 id="SM18-to-OB"><a href="#SM18-to-OB" class="headerlink" title="SM18 to OB"></a>SM18 to OB</h3><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/44.gif"/>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 自动化 </tag>
+            
+            <tag> 记忆方法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一次日程管理的尝试</title>
       <link href="/year/05/dcc0d827435a.html"/>
       <url>/year/05/dcc0d827435a.html</url>
