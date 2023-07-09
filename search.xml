@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>日程管理：不妨再往前多走一步</title>
+      <link href="/year/07/f73397089141.html"/>
+      <url>/year/07/f73397089141.html</url>
+      
+        <content type="html"><![CDATA[<p>信心满满，明天要6点起床，但是如果你赖床，7点才起床，有时8点才能开始进行相关的计划，这样一来，计划免不了受到影响。</p><p>又或者，突然有个临时的事情，需要紧急处理，免不了，计划又要推迟。</p><p>事实上，我们可以看到一点，变化是绝对的， 唯一不变的就是变化。但是就是因为这些不可控的变化，往往会削弱我们的行动力，直接影响我们的情绪，要知道，一个计划被破坏后干脆破罐子破摔的情况是再常见不过了。</p><h1 id="自动排计划的实现"><a href="#自动排计划的实现" class="headerlink" title="自动排计划的实现"></a>自动排计划的实现</h1><p>在此前，通过在Excel里面进行计划的周期排布，每日自动同步进Obsidian的日记中进行日程安排，但是在使用一段时间后，确实出现开头说的那些情况，直到有一天，了解到Supermemo里面有一个小众的功能“plan”，<a href="https://zhuanlan.zhihu.com/p/380442173">计划一个没有压力的完美高效的一天 - 知乎 (zhihu.com)</a>，其理念是十分不错的，但是在使用过程中，还是感觉有些许不适应的地方，并且其不适合中文任务，那么，我为何不自己写一个呢？</p><p>就这样，带着一个大致的想法，直接开始了设计。</p><div style="display: flex; justify-content: center; align-items: center;"> <img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/20230709204919.png"  /></div><h1 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h1><ul><li>仅需在Excel表中填入相应的任务及预计耗时，即可自动进行计划排期；</li><li>支持提前或延后完成任务，自动规划后续任务完成时间；</li><li>支持插入临时任务，自动规划后续任务完成时间；</li><li>支持固定定时开始任务，如12点的中午时间，17:30的运动时间；</li><li>支持固定耗时比重，压缩各环节计划时间，提高计划完成度；</li><li>支持直接链接任务对应的PDF、视频、网页等链接，无需浪费时间在文件查找；</li><li>支持一键下载今日计划、实际耗时对比，便于后续计划铺排。</li></ul><div style="display: flex; justify-content: center; align-items: center;"> <img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/001.gif"/></div><h1 id="理念介绍"><a href="#理念介绍" class="headerlink" title="理念介绍"></a>理念介绍</h1><ul><li>主动设计生活；</li><li>尊重客观规律，积极应对变化；</li><li>专注当下，降低阻力；</li><li>编程是一个创造性工作，不应“过早设计”，即不应停留于想法，要在实践中去思考前进的方向；</li><li>复利意识贯彻始终，越有价值的事情要越早开始；</li><li>习惯是设计出来的，行为是设计出来，人生也是设计出来的，只是谁是主导者，要慎重思考。</li></ul><h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 任务管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2023年6月总结</title>
       <link href="/year/06/5162966254d3.html"/>
       <url>/year/06/5162966254d3.html</url>
