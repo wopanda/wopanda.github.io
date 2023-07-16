@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>借“卢曼编码”展现思维链路</title>
+      <link href="/year/07/b55c2079326e.html"/>
+      <url>/year/07/b55c2079326e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="卢曼编码"><a href="#卢曼编码" class="headerlink" title="卢曼编码"></a>卢曼编码</h1><p>卢曼（Luhmann）是谁？一位34年间出版了50多部著作的极其卓越的德国社会学家。如何高产的原因之一，离不开卡片盒系统。</p><p>卡片盒系统是什么？详见： <a href="https://zettelkasten.de/introduction/zh/">卢曼卡片盒笔记法介绍 (Introduction to the Zettelkasten Method) • Zettelkasten Method</a></p><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/111111.png"/><p>事实上，可以简单的概括为，平日不断积累卡片，并且进行有序整理，之后，与卡片盒进行“对话”，产生新的洞见。</p><h1 id="思维链路"><a href="#思维链路" class="headerlink" title="思维链路"></a>思维链路</h1><p>此前，对于卡片盒着迷过一段时间，后来也慢慢冷却了，可能是因为，仍没有养成写卡片的习惯，因此，始终感受不到这个方法的神奇。</p><p>后来，渐渐理解了题目的考察本质，即对最小知识点的包装，通过对多个知识点进行串联（树根与树枝），考察考生的知识点掌握程度以及逻辑能力。</p><p>那么，如果想要实现一种效果，看到一道题目，脑海里浮现出多条可能考察的路径（思维链路），接着，通过题干的线索，排除掉一些“无用”的路径，对于解题来说，是否较有助益？</p><p>此外，当题目做错时，也可以迅速暴露出哪个链路出现问题，进行强化学习。</p><h1 id="广泛阅读"><a href="#广泛阅读" class="headerlink" title="广泛阅读"></a>广泛阅读</h1><p>除知识点链路呈现之外，读书时所做的卡片笔记，自然也可以继续使用这种编码，可以以全局的视角，去认识自己的知识体系。</p><h2 id="明确需求"><a href="#明确需求" class="headerlink" title="明确需求"></a>明确需求</h2><p>始终抱着“以我为主，为我所用”的理念，要借鉴卢曼的卡片盒方法，未必必须采用纸质卡片，关键是，明确需求以及理清想要达到的效果（解决的问题）即可。</p><ul><li>编码是有意义的，但是手动编码却也没有必要。<ul><li>在电子化笔记时命名较为繁琐<ul><li>1 → 2</li><li>1a1 → 1a2</li><li>1a1b → 1a1c</li><li>1a3c → 1a3c1</li></ul></li><li>事实上，只要我们清晰的知道接下来的卡片想往哪个方向走即可。</li></ul></li><li>需要有快速总览、局部锁定链路的功能。<ul><li>总览的目的是为了觉察自己对所关注的主题的认知总体情况。</li><li>查看局部链路的目的是为了锁定卡片在主题中的位置，及其较为相关的卡片。</li></ul></li></ul><h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>用python写了几个脚本，功能如下：</p><ul><li>任意打开一张卡片，支持打开其所在主题的全局链路，并支持凸显所在链路。</li></ul><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/new_canvas.gif"/><ul><li>任意打开一张卡片，支持“左返”、“上返”、“下潜”、“右进”，查看或创建编码卡片：若卡片已存在，则打开，若卡片不存在，则创建相应路径的编码卡片。</li></ul><img src="https://cdn.jsdelivr.net/gh/wopanda/picgo/img/333.gif"/>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习方法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>日程管理：不妨再往前多走一步</title>
       <link href="/year/07/f73397089141.html"/>
       <url>/year/07/f73397089141.html</url>
