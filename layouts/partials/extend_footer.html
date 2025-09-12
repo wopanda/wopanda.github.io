@@ -192,6 +192,81 @@ document.addEventListener('DOMContentLoaded', function() {
   
   console.log('简化版目录初始化完成');
 });
+
+// 移动端目录控制
+document.addEventListener('DOMContentLoaded', function() {
+  const tocSidebar = document.querySelector('.toc-sidebar');
+  if (!tocSidebar) return;
+
+  // 创建移动端目录按钮
+  const mobileButton = document.createElement('div');
+  mobileButton.className = 'mobile-toc-button';
+  mobileButton.setAttribute('aria-label', '打开目录');
+  document.body.appendChild(mobileButton);
+
+  // 创建遮罩层
+  const overlay = document.createElement('div');
+  overlay.className = 'toc-overlay';
+  document.body.appendChild(overlay);
+
+  // 检查是否为移动端
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  // 切换移动端目录显示
+  function toggleMobileToc() {
+    const isOpen = tocSidebar.classList.contains('mobile-open');
+    
+    if (isOpen) {
+      tocSidebar.classList.remove('mobile-open');
+      overlay.classList.remove('active');
+      mobileButton.classList.remove('active');
+      document.body.style.overflow = '';
+    } else {
+      tocSidebar.classList.add('mobile-open');
+      overlay.classList.add('active');
+      mobileButton.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  // 关闭移动端目录
+  function closeMobileToc() {
+    tocSidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+    mobileButton.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // 事件监听
+  mobileButton.addEventListener('click', toggleMobileToc);
+  overlay.addEventListener('click', closeMobileToc);
+
+  // 监听目录项点击，移动端点击后关闭目录
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('.toc-content a') && isMobile()) {
+      setTimeout(closeMobileToc, 200);
+    }
+  });
+
+  // 监听窗口大小变化
+  window.addEventListener('resize', function() {
+    if (!isMobile()) {
+      closeMobileToc();
+      mobileButton.style.display = 'none';
+    } else {
+      mobileButton.style.display = 'flex';
+    }
+  });
+
+  // 初始化移动端按钮状态
+  if (isMobile()) {
+    mobileButton.style.display = 'flex';
+  } else {
+    mobileButton.style.display = 'none';
+  }
+});
 </script>
 
 <style>
