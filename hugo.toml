@@ -1,4 +1,4 @@
-baseURL = "https://qingxikao.com/" # GitHub Pages 会自动设置正确的URL
+baseURL = "https://www.qingxikao.com/" # GitHub Pages 会自动设置正确的URL
 languageCode = "zh-cn"
 title = "公考小饭团"
 theme = "PaperMod"
