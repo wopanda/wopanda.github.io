@@ -46,8 +46,7 @@ jobs:
         run: |
           hugo \
             --gc \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"          
+            --minify 
       
       - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
