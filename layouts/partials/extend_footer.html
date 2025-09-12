@@ -1,0 +1,253 @@
+<!-- 自定义页脚扩展 -->
+
+<!-- 统计代码（可选） -->
+<!-- 如果你想添加 Google Analytics -->
+<!-- 
+{{ if .Site.Params.googleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{ end }}
+-->
+
+<!-- 百度统计（如果需要） -->
+<!-- 
+{{ if .Site.Params.baiduAnalytics }}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?{{ .Site.Params.baiduAnalytics }}";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+{{ end }}
+-->
+
+<!-- 回到顶部按钮 -->
+<button id="back-to-top" title="回到顶部" style="display: none;">
+  <span class="material-icons">keyboard_arrow_up</span>
+</button>
+
+<script>
+// 回到顶部功能
+const backToTopButton = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    backToTopButton.style.display = 'block';
+  } else {
+    backToTopButton.style.display = 'none';
+  }
+});
+
+backToTopButton.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// 代码复制功能增强
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('pre');
+  
+  codeBlocks.forEach(function(codeBlock) {
+    const copyButton = document.createElement('button');
+    copyButton.className = 'copy-code-button';
+    copyButton.type = 'button';
+    copyButton.innerText = '复制';
+    
+    copyButton.addEventListener('click', function() {
+      const code = codeBlock.querySelector('code');
+      const text = code.innerText;
+      
+      navigator.clipboard.writeText(text).then(function() {
+        copyButton.innerText = '已复制!';
+        setTimeout(function() {
+          copyButton.innerText = '复制';
+        }, 2000);
+      });
+    });
+    
+    codeBlock.appendChild(copyButton);
+  });
+});
+
+// 图片懒加载
+if ('IntersectionObserver' in window) {
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+        imageObserver.unobserve(img);
+      }
+    });
+  });
+
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    imageObserver.observe(img);
+  });
+}
+
+// 简化的右侧目录功能 - 固定定位 + 高亮跟随
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('初始化简化版右侧目录...');
+  
+  const tocLinks = document.querySelectorAll('.toc-content a');
+  const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+  
+  if (tocLinks.length === 0 || headings.length === 0) {
+    console.log('未找到目录或标题，跳过初始化');
+    return;
+  }
+  
+  console.log(`找到 ${tocLinks.length} 个目录链接和 ${headings.length} 个标题`);
+
+  // 为每个标题添加ID（如果没有的话）
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+  });
+  
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerHeight = 80;
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // 简单的目录高亮功能
+  function highlightCurrentSection() {
+    let current = '';
+    
+    headings.forEach(heading => {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top <= 150) {
+        current = heading.id;
+      }
+    });
+    
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerHeight = 80;
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // 监听滚动事件，更新高亮
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        highlightCurrentSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+  
+  // 初始化高亮
+  highlightCurrentSection();
+  
+  console.log('简化版目录初始化完成');
+});
+</script>
+
+<style>
+/* 回到顶部按钮样式 */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+#back-to-top:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* 代码复制按钮样式 */
+.copy-code-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+pre {
+  position: relative;
+}
+
+pre:hover .copy-code-button {
+  opacity: 1;
+}
+
+/* 图片懒加载样式 */
+img.lazy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img.lazy.loaded {
+  opacity: 1;
+}
+</style>

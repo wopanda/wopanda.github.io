@@ -1,0 +1,649 @@
+/* 
+ * PaperMod 风格优化 - 极简主义设计
+ * 参考：https://github.com/adityatelange/hugo-PaperMod
+ * 理念：Clean, Fast, Minimal
+ */
+
+:root {
+    /* 极简色彩系统 */
+    --theme: #fff;
+    --entry: #fff;
+    --primary: rgba(0, 0, 0, 0.88);
+    --secondary: rgba(0, 0, 0, 0.56);
+    --tertiary: rgba(0, 0, 0, 0.16);
+    --content: rgba(0, 0, 0, 0.88);
+    --hljs-bg: #1c1d21;
+    --code-bg: rgba(0, 0, 0, 0.05);
+    --border: rgba(0, 0, 0, 0.08);
+}
+
+/* 深色主题 */
+[data-theme="dark"] {
+    --theme: #1d1e20;
+    --entry: #2e2e33;
+    --primary: rgba(255, 255, 255, 0.84);
+    --secondary: rgba(255, 255, 255, 0.56);
+    --tertiary: rgba(255, 255, 255, 0.16);
+    --content: rgba(255, 255, 255, 0.84);
+    --hljs-bg: #2e2e33;
+    --code-bg: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+/* 全局字体优化 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto, Oxygen, Ubuntu, Cantarell, 'open sans', 'helvetica neue', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--theme);
+    color: var(--primary);
+}
+
+/* 简化首页欢迎区域 */
+.home-info {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 32px; /* 进一步减少垂直内边距 */
+    margin: 24px 0;
+    text-align: center;
+}
+
+.home-info h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px; /* 减少标题和描述之间的间距 */
+    color: var(--primary);
+}
+
+.home-info p {
+    color: var(--secondary);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 文章卡片 - 极简风格 */
+.post-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.post-entry:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.entry-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.entry-header h2 a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.entry-header h2 a:hover {
+    color: var(--secondary);
+}
+
+.entry-content p {
+    color: var(--secondary);
+    margin: 8px 0 0 0;
+    line-height: 1.5;
+}
+
+/* 简化标签样式 */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.post-tags .tag {
+    background: var(--code-bg);
+    color: var(--secondary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.1s ease;
+}
+
+.post-tags .tag:hover {
+    background: var(--tertiary);
+}
+
+/* 元信息 */
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 8px;
+}
+
+/* 代码样式 */
+code {
+    background: var(--code-bg);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+pre {
+    background: var(--hljs-bg);
+    color: #c9d1d9;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 16px 0;
+    line-height: 1.45;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* 导航栏 */
+.header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .header {
+    background: rgba(29, 30, 32, 0.8);
+}
+
+.nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.1s ease;
+}
+
+.nav a:hover {
+    background: var(--tertiary);
+}
+
+/* 按钮 */
+.btn {
+    background: var(--primary);
+    color: var(--theme);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.1s ease;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* 搜索框 */
+#searchbox input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--entry);
+    color: var(--primary);
+    font-size: 16px;
+}
+
+#searchbox input:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+/* 分页 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 32px 0;
+}
+
+.pagination a,
+.pagination span {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background: var(--tertiary);
+}
+
+.pagination .current {
+    background: var(--primary);
+    color: var(--theme);
+    border-color: var(--primary);
+}
+
+/* 文章内容和右侧目录布局 */
+.post-content-wrapper {
+    display: flex;
+    gap: 32px;
+    position: relative;
+    align-items: flex-start;
+    min-height: 100vh; /* 确保有足够高度让sticky生效 */
+}
+
+.post-content-main {
+    flex: 1;
+    min-width: 0; /* 防止 flex 子元素溢出 */
+}
+
+/* 右侧目录样式 - 简单固定定位 */
+.toc-sidebar {
+    position: fixed !important;
+    top: 80px !important;
+    right: 20px !important;
+    width: 240px !important;
+    z-index: 1000 !important;
+}
+
+.toc-sticky {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toc-details[open] .toc-title::after {
+    transform: rotate(90deg);
+}
+
+.toc-title {
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.toc-title::after {
+    content: '▶';
+    margin-left: auto;
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    color: var(--secondary);
+}
+
+.toc-content {
+    margin-top: 8px;
+}
+
+.toc-content ul {
+    margin: 0;
+    padding-left: 16px;
+    list-style: none;
+}
+
+.toc-content li {
+    margin-bottom: 4px;
+}
+
+.toc-content a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.4;
+    display: block;
+    padding: 2px 0;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+    margin-left: -8px;
+    transition: all 0.2s ease;
+}
+
+.toc-content a:hover {
+    color: var(--primary);
+    border-left-color: var(--tertiary);
+    padding-left: 12px;
+}
+
+/* 当前激活的目录项 */
+.toc-content a.active {
+    color: var(--primary);
+    border-left-color: var(--primary);
+    font-weight: 500;
+    padding-left: 12px;
+    background: rgba(var(--accent-color), 0.05);
+    border-radius: 4px;
+}
+
+/* 阅读进度指示器 */
+.toc-progress {
+    width: 100%;
+    height: 3px;
+    background: var(--tertiary);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.toc-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* 目录滚动增强 */
+.toc-content {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* 目录项的动态效果 */
+.toc-content a {
+    transition: all 0.3s ease, opacity 0.3s ease, transform 0.15s ease;
+    position: relative;
+}
+
+.toc-content a:hover {
+    color: var(--primary);
+    border-left-color: var(--tertiary);
+    padding-left: 12px;
+    transform: translateX(2px);
+}
+
+/* 根据滚动方向的动态效果 */
+.toc-sidebar[data-scroll-direction="down"] .toc-sticky {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.toc-sidebar[data-scroll-direction="up"] .toc-sticky {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 增强粘性定位 */
+.toc-sticky {
+    transition: box-shadow 0.3s ease;
+    border: 1px solid var(--border);
+    background: var(--entry);
+}
+
+/* 目录标题增强 */
+.toc-title {
+    position: relative;
+    user-select: none;
+}
+
+.toc-title::before {
+    content: '📑';
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+/* 嵌套目录层级 */
+.toc-content ul ul {
+    padding-left: 12px;
+    margin-top: 4px;
+}
+
+.toc-content ul ul a {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* 响应式设计 - 移动端隐藏右侧目录 */
+@media (max-width: 1024px) {
+    .post-content-wrapper {
+        flex-direction: column;
+    }
+    
+    .toc-sidebar {
+        width: 100%;
+        order: -1; /* 在移动端将目录移到顶部 */
+    }
+    
+    .toc-sticky {
+        position: static;
+        max-height: none;
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .toc-sidebar {
+        display: none; /* 在小屏幕上完全隐藏目录 */
+    }
+    
+    .post-content-wrapper {
+        flex-direction: column;
+    }
+}
+
+/* 隐藏主题自带的目录，只显示我们的右侧目录 */
+.toc {
+    display: none !important; /* 隐藏原来的顶部目录 */
+}
+
+/* 隐藏主题可能的其他目录样式 */
+details.toc {
+    display: none !important;
+}
+
+.post-single .toc {
+    display: none !important;
+}
+
+/* 确保我们的右侧目录显示 */
+.toc-sidebar {
+    display: block !important;
+}
+
+/* 社交图标 */
+.social-icons {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.social-icons a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tertiary);
+    border-radius: 6px;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: background-color 0.1s ease;
+}
+
+.social-icons a:hover {
+    background: var(--border);
+}
+
+/* 页脚 */
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    margin-top: 48px;
+    text-align: center;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .home-info {
+        padding: 24px;
+        margin: 16px 0;
+    }
+    
+    .home-info h1 {
+        font-size: 24px;
+    }
+    
+    .post-entry {
+        padding: 20px;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tertiary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
+
+/* 去除多余动画 */
+* {
+    transition-duration: 0.1s !important;
+}
+
+/* 保持内容为王 */
+.main {
+    max-width: 1200px; /* 增加宽度以适应右侧目录 */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 首页和列表页保持原有宽度 */
+.list .main,
+.home .main {
+    max-width: 720px;
+}
+
+/* 文章页面优化 */
+.post-header {
+    margin-bottom: 32px;
+}
+
+.post-title {
+    font-size: 36px; /* 增大标题字号 */
+    font-weight: 700;
+    line-height: 1.3; /* 增加行高 */
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+
+.post-content {
+    font-size: 17px; /* 增大正文字号，提升可读性 */
+    line-height: 1.8; /* 增加行高，使段落更清晰 */
+    color: var(--content);
+}
+
+/* 针对短段落，优化段落间距 */
+.post-content p {
+    margin-bottom: 1.2em; /* 使用相对单位，间距更和谐 */
+}
+
+/* 标题样式 */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--primary);
+}
+
+.post-content h2 { font-size: 1.5em; margin-top: 2.2em; }
+.post-content h3 { font-size: 1.2em; }
+
+/* 列表样式 */
+.post-content ul,
+.post-content ol {
+    margin-bottom: 1.2em;
+    padding-left: 1.5em;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+/* 引用块样式 */
+.post-content blockquote {
+    border-left: 3px solid var(--tertiary);
+    padding-left: 1.5em;
+    margin: 1.5em 0;
+    color: var(--secondary);
+    font-style: normal;
+}
+
+/* 强调文本 */
+.post-content strong {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* 分隔线 */
+.post-content hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+}
+
+/* 确保简洁性 */
+.hide-on-mobile { display: none; }
+@media (min-width: 768px) {
+    .hide-on-mobile { display: block; }
+}
+
+/* 覆盖主题首页首卡片的固定高度，改为自适应内容 */
+.first-entry {
+    min-height: 0 !important;
+}
+
+/* 精简首卡片标题与正文间距 */
+.first-entry .entry-content {
+    margin: 8px 0;
+}

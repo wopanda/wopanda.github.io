@@ -1,0 +1,243 @@
+baseURL = "/" # GitHub Pages 会自动设置正确的URL
+languageCode = "zh-cn"
+title = "公考小饭团"
+theme = "PaperMod"
+defaultContentLanguage = "zh-cn"
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+# 分页配置
+[pagination]
+pagerSize = 10
+
+# 启用Gitinfo（需要git repo）
+enableGitInfo = false
+
+# 启用内联短代码
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    style = "github"
+
+[params]
+# 设置默认主题模式
+defaultTheme = "auto"
+disableThemeToggle = false
+
+# 日期格式（中文）
+DateFormat = "2006年01月02日"
+
+# 文章摘要长度
+summaryLength = 150
+
+# 显示阅读时间
+ShowReadingTime = true
+# 显示分享按钮
+ShowShareButtons = false
+# 显示文章更新时间
+ShowLastMod = true
+# 显示文章字数
+ShowWordCount = true
+# 显示目录（右侧）
+ShowToc = true
+# 目录展开
+TocOpen = true
+# 使用Hugo内置TOC
+UseHugoToc = true
+# 显示编辑建议链接
+ShowPostNavLinks = true
+# 显示面包屑导航
+ShowBreadCrumbs = true
+# 显示代码复制按钮
+ShowCodeCopyButtons = true
+# 隐藏摘要
+ShowSummary = true
+# 显示全文
+ShowFullTextinRSS = true
+
+# SEO优化
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1000
+threshold = 0.4
+minMatchCharLength = 0
+keys = ["title", "permalink", "summary", "content"]
+
+# 首页配置
+[params.homeInfoParams]
+Title = "公考小饭团 🍙"
+Content = """
+欢迎来到我的公考小站！<br>
+可以点击“关于”找到我。<br>
+这里分享如何用技术和AI高效备考！
+"""
+
+# 个人资料模式
+[params.profileMode]
+enabled = false
+title = "个人简介"
+subtitle = "这里是副标题"
+imageUrl = "images/avatar.jpg"
+imageWidth = 120
+imageHeight = 120
+
+# 菜单配置
+[[menu.main]]
+identifier = "home"
+name = "首页"
+url = "/"
+weight = 10
+
+[[menu.main]]
+identifier = "archives"
+name = "归档"
+url = "/archives/"
+weight = 20
+
+[[menu.main]]
+identifier = "categories"
+name = "分类"
+url = "/categories/"
+weight = 30
+
+[[menu.main]]
+identifier = "tags"
+name = "标签"
+url = "/tags/"
+weight = 40
+
+[[menu.main]]
+identifier = "search"
+name = "搜索"
+url = "/search/"
+weight = 50
+
+[[menu.main]]
+identifier = "about"
+name = "关于"
+url = "/about/"
+weight = 60
+
+# 分类设置
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+# 输出格式
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML", "RSS"]
+
+# 隐私设置
+[privacy]
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+
+  [privacy.x]
+    disabled = false
+    enableDNT = true
+    simple = true
+
+  [privacy.instagram]
+    disabled = false
+    simple = true
+
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
+
+# 相关文章
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    weight = 200
+
+# 图片处理
+[params.assets]
+  disableHLJS = false
+  disableFingerprinting = false
+
+# 缓存控制
+[caches]
+  [caches.getjson]
+    dir = ":cacheDir/:project"
+    maxAge = "10m"
+  [caches.getcsv]
+    dir = ":cacheDir/:project"
+    maxAge = "10m"
+  [caches.images]
+    dir = ":resourceDir/_gen"
+    maxAge = "720h"
+  [caches.assets]
+    dir = ":resourceDir/_gen"
+    maxAge = "720h"
+  [caches.modules]
+    dir = ":cacheDir/modules"
+    maxAge = "720h"
+
+# 压缩配置
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
+  [minify.tdewolff]
+    [minify.tdewolff.css]
+      keepCSS2 = true
+      precision = 0
+    [minify.tdewolff.html]
+      keepComments = false
+      keepConditionalComments = true
+      keepDefaultAttrVals = true
+      keepDocumentTags = true
+      keepEndTags = true
+      keepQuotes = false
+      keepWhitespace = false
+    [minify.tdewolff.js]
+      keepVarNames = false
+      precision = 0
+    [minify.tdewolff.json]
+      precision = 0
+    [minify.tdewolff.svg]
+      precision = 0
+    [minify.tdewolff.xml]
+      keepWhitespace = false
+
+# 评论系统（Giscus）
+[params.giscus]
+  repo = "your-username/your-repo"
+  repoID = "your-repo-id" 
+  category = "General"
+  categoryID = "your-category-id"
+  mapping = "pathname"
+  strict = "0"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "bottom"
+  theme = "preferred_color_scheme"
+  lang = "zh-CN"
+
+# 统计分析（可选）
+# googleAnalytics = "G-XXXXXXXXXX"
+# baiduAnalytics = "xxxxxxxxxxxxxxxxx"

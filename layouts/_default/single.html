@@ -1,0 +1,90 @@
+{{- define "main" }}
+
+<article class="post-single">
+  {{- $isHidden := .Params.hideMeta | default (.Site.Params.hideMeta) }}
+  {{- if not $isHidden }}
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title">
+      {{ .Title }}
+      {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_meta.html" . -}}
+    </div>
+    {{- end }}
+  </header>
+  {{- end }}
+
+  {{- $isHidden := (.Param "hideAuthor" | default (.Site.Params.hideAuthor)) }}
+  {{- if not $isHidden }}
+  {{ partial "author.html" . }}
+  {{- end }}
+
+  <!-- 主要内容区域，包含文章和右侧目录 -->
+  <div class="post-content-wrapper">
+    <!-- 文章内容 -->
+    <div class="post-content-main">
+      {{- if .Content }}
+      <div class="post-content">
+        {{- if not (.Param "disableAnchoredHeadings") }}
+        {{- partial "anchored_headings.html" .Content -}}
+        {{- else }}{{ .Content }}{{ end }}
+      </div>
+      {{- end }}
+
+      {{- if (.Param "ShowPostNavLinks") }}
+      {{- partial "post_nav_links.html" . }}
+      {{- end }}
+
+      {{- if (and .Site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+      {{- partial "share_icons.html" . -}}
+      {{- end }}
+    </div>
+
+    <!-- 右侧目录 -->
+    {{- if and (.Param "ShowToc") (.TableOfContents) }}
+    <aside class="toc-sidebar">
+      <div class="toc-sticky">
+        <details class="toc-details" open>
+          <summary class="toc-title">目录</summary>
+          <div class="toc-content">
+            {{ .TableOfContents }}
+          </div>
+        </details>
+      </div>
+    </aside>
+    {{- end }}
+  </div>
+
+  <footer class="post-footer">
+    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+    {{- if (.Param $tags) }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms $tags) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+
+    {{- if (and .Site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+
+  {{- if (.Param "comments") }}
+  {{- partial "comments.html" . }}
+  {{- end }}
+</article>
+
+{{- end }}{{/* end main */}}

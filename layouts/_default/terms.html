@@ -1,0 +1,32 @@
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+  {{- /* 中文标题映射：categories/tags/series */ -}}
+  {{- $titleMap := dict "categories" "分类" "tags" "标签" "series" "系列" -}}
+  {{- $cn := index $titleMap .Type | default .Title -}}
+  <h1>{{ $cn }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+<ul class="terms-tags">
+  {{- $type := .Type }}
+  {{- range $key, $value := .Data.Terms.Alphabetical }}
+  {{- $name := .Name }}
+  {{- $count := .Count }}
+  {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+  <li>
+    <a href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup></a>
+  </li>
+  {{- end }}
+  {{- end }}
+</ul>
+
+{{- end }}{{/* end main */ -}}
+
+

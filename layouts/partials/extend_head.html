@@ -1,0 +1,73 @@
+<!-- 自定义头部扩展 -->
+
+<!-- SEO 优化 -->
+<meta name="author" content="你的名字">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="zh_CN">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@your-twitter">
+<meta name="twitter:creator" content="@your-twitter">
+
+<!-- 性能优化 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- 简洁字体配置 - PaperMod 风格 -->
+<style>
+/* 使用系统字体，保持简洁快速 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'segoe ui', Roboto, Oxygen, Ubuntu, Cantarell, 'open sans', 'helvetica neue', sans-serif;
+}
+
+/* 中文字体优化 */
+:lang(zh-CN) {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* 代码字体 */
+code, pre {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+</style>
+
+<!-- 结构化数据 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "{{ .Site.Title }}",
+  "description": "{{ .Site.Params.description | default "个人技术博客，分享编程经验和技术思考" }}",
+  "url": "{{ .Site.BaseURL }}",
+  "author": {
+    "@type": "Person",
+    "name": "你的名字"
+  },
+  "blogPost": [
+    {{- range first 10 (where .Site.RegularPages "Type" "posts") -}}
+    {
+      "@type": "BlogPosting",
+      "headline": "{{ .Title }}",
+      "description": "{{ .Summary }}",
+      "url": "{{ .Permalink }}",
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+      "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+      "author": {
+        "@type": "Person",
+        "name": "你的名字"
+      }
+    }{{ if not (eq . (index (first 10 (where $.Site.RegularPages "Type" "posts")) 9)) }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+
+<!-- 安全性优化 -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
