@@ -378,6 +378,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  // 移动端收起/展开功能
+  function addMobileToggle() {
+    if (window.innerWidth <= 768) {
+      let tapCount = 0;
+      let tapTimer;
+      
+      statsWidget.addEventListener('click', function(e) {
+        tapCount++;
+        
+        if (tapCount === 1) {
+          tapTimer = setTimeout(() => {
+            tapCount = 0;
+          }, 300);
+        } else if (tapCount === 2) {
+          clearTimeout(tapTimer);
+          tapCount = 0;
+          
+          // 双击切换收起/展开
+          statsWidget.classList.toggle('collapsed');
+        }
+      });
+    }
+  }
+  
+  // 初始化移动端功能
+  addMobileToggle();
+  
+  // 窗口大小变化时重新初始化
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      addMobileToggle();
+    } else {
+      statsWidget.classList.remove('collapsed');
+    }
+  });
+  
   console.log('不蒜子统计部件初始化完成');
 });
 </script>
@@ -511,40 +547,63 @@ img.lazy.loaded {
 /* 移动端适配 */
 @media (max-width: 768px) {
   .stats-widget {
-    bottom: 70px;
-    right: 15px;
-    left: 15px;
-    max-width: none;
+    bottom: 10px;
+    right: 10px;
+    left: auto;
+    max-width: 120px;
     position: fixed;
+    padding: 8px;
+    opacity: 0.8;
+    transform: scale(0.85);
   }
   
   .stats-container {
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 6px;
   }
   
   .stats-item {
-    flex: 1;
-    flex-direction: column;
-    text-align: center;
-    padding: 8px 4px;
-    gap: 4px;
+    flex: none;
+    flex-direction: row;
+    text-align: left;
+    padding: 4px 6px;
+    gap: 6px;
   }
   
   .stats-info {
-    align-items: center;
+    align-items: flex-start;
   }
   
   .stats-icon {
-    font-size: 16px;
+    font-size: 14px;
+    width: 16px;
   }
   
   .stats-number {
-    font-size: 14px;
+    font-size: 11px;
+    font-weight: 500;
   }
   
   .stats-label {
-    font-size: 10px;
+    font-size: 8px;
+    margin-top: 1px;
+  }
+  
+  /* 移动端添加收起/展开功能 */
+  .stats-widget.collapsed {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+  
+  .stats-widget.collapsed .stats-container {
+    display: none;
+  }
+  
+  .stats-widget.collapsed::before {
+    content: "📊";
+    font-size: 16px;
+    text-align: center;
+    display: block;
   }
 }
 
