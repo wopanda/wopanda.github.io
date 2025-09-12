@@ -163,10 +163,22 @@ pre code {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .dark .header {
     background: rgba(29, 30, 32, 0.8);
+}
+
+/* 导航栏文字颜色确保在深色模式下正确显示 */
+.dark .nav a {
+    color: var(--primary);
+}
+
+.dark .logo a {
+    color: var(--primary);
 }
 
 .nav a {
@@ -198,6 +210,40 @@ pre code {
 
 .btn:hover {
     opacity: 0.8;
+}
+
+/* 主题切换按钮样式优化 */
+button#theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button#theme-toggle:hover {
+    background: var(--tertiary);
+    transform: scale(1.05);
+}
+
+button#theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* 确保主题切换图标在深色模式下正确显示 */
+.dark button#theme-toggle {
+    color: var(--primary);
+}
+
+button#theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
 }
 
 /* 搜索框 */
@@ -598,6 +644,41 @@ details.toc {
     .post-meta {
         flex-direction: column;
         gap: 8px;
+    }
+    
+    /* 移动端导航栏深色模式修复 */
+    .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .dark .header {
+        background: rgba(29, 30, 32, 0.95);
+        border-bottom: 1px solid var(--border);
+    }
+    
+    /* 确保主题切换按钮在移动端正常显示 */
+    button#theme-toggle {
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+    }
+    
+    button#theme-toggle:hover {
+        background: var(--tertiary);
+    }
+    
+    .dark button#theme-toggle {
+        color: var(--primary);
     }
 }
 

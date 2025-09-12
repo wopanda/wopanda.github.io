@@ -108,38 +108,24 @@ url = "/archives/"
 weight = 20
 
 [[menu.main]]
-identifier = "categories"
-name = "分类"
-url = "/categories/"
-weight = 30
-
-[[menu.main]]
 identifier = "tags"
 name = "标签"
 url = "/tags/"
-weight = 40
-
-[[menu.main]]
-identifier = "search"
-name = "搜索"
-url = "/search/"
-weight = 50
+weight = 30
 
 [[menu.main]]
 identifier = "about"
 name = "关于"
 url = "/about/"
-weight = 60
+weight = 40
 
-# 分类设置
+# 分类设置（极简化：只保留标签）
 [taxonomies]
-category = "categories"
 tag = "tags"
-series = "series"
 
-# 输出格式
+# 输出格式（移除JSON搜索索引）
 [outputs]
-home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS"]
 section = ["HTML", "RSS"]
 
 # 隐私设置
