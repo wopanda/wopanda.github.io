@@ -1,18 +1,38 @@
 <!-- 自定义页脚扩展 -->
 
 <!-- 统计代码（可选） -->
-<!-- 如果你想添加 Google Analytics -->
-<!-- 
-{{ if .Site.Params.googleAnalytics }}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<!-- Google Analytics -->
+{{ if hugo.IsProduction }}
+{{ with .Site.Config.Services.GoogleAnalytics.ID }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+  gtag('config', '{{ . }}');
 </script>
 {{ end }}
--->
+{{ else }}
+{{ with .Site.Params.googleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ . }}');
+</script>
+{{ end }}
+{{ end }}
+
+<!-- 不蒜子统计 -->
+<script>
+// 设置不蒜子的独特站点标识
+window.busuanzi_site_base64_decode = false;
+window.busuanzi_site_offset = 0;
+window.busuanzi_site_pv_header = "公考小饭团-PV";
+window.busuanzi_site_uv_header = "公考小饭团-UV";
+</script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!-- 百度统计（如果需要） -->
 <!-- 
@@ -28,6 +48,39 @@ var _hmt = _hmt || [];
 </script>
 {{ end }}
 -->
+
+<!-- 访问统计显示部件 -->
+<div id="stats-widget" class="stats-widget">
+  <div class="stats-container">
+    <div class="stats-item">
+      <span class="stats-icon">👥</span>
+      <div class="stats-info">
+        <div class="stats-number">
+          <span id="busuanzi_value_site_pv" data-flag-title="公考小饭团博客">-</span>
+        </div>
+        <div class="stats-label">总访问量</div>
+      </div>
+    </div>
+    <div class="stats-item">
+      <span class="stats-icon">👤</span>
+      <div class="stats-info">
+        <div class="stats-number">
+          <span id="busuanzi_value_site_uv" data-flag-title="公考小饭团博客">-</span>
+        </div>
+        <div class="stats-label">访客数</div>
+      </div>
+    </div>
+    <div class="stats-item">
+      <span class="stats-icon">📄</span>
+      <div class="stats-info">
+        <div class="stats-number">
+          <span id="busuanzi_value_page_pv" data-flag-title="公考小饭团博客">-</span>
+        </div>
+        <div class="stats-label">本页访问</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- 回到顶部按钮 -->
 <button id="back-to-top" title="回到顶部" style="display: none;">
@@ -267,6 +320,66 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileButton.style.display = 'none';
   }
 });
+
+// 不蒜子统计增强功能
+document.addEventListener('DOMContentLoaded', function() {
+  const statsWidget = document.getElementById('stats-widget');
+  if (!statsWidget) return;
+  
+  // 等待不蒜子加载完成后添加数字格式化
+  function formatBusuanziNumbers() {
+    const elements = [
+      'busuanzi_value_site_pv',
+      'busuanzi_value_site_uv', 
+      'busuanzi_value_page_pv'
+    ];
+    
+    elements.forEach(id => {
+      const element = document.getElementById(id);
+      if (element && element.textContent && element.textContent !== '-') {
+        const num = parseInt(element.textContent);
+        if (!isNaN(num)) {
+          element.textContent = formatNumber(num);
+        }
+      }
+    });
+  }
+  
+  // 格式化数字显示
+  function formatNumber(num) {
+    if (num >= 10000) {
+      return (num / 10000).toFixed(1) + 'w';
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'k';
+    }
+    return num.toString();
+  }
+  
+  // 监听不蒜子数据加载
+  let checkCount = 0;
+  const checkInterval = setInterval(() => {
+    checkCount++;
+    const pvElement = document.getElementById('busuanzi_value_site_pv');
+    
+    if (pvElement && pvElement.textContent !== '-') {
+      formatBusuanziNumbers();
+      clearInterval(checkInterval);
+      console.log('不蒜子统计加载完成');
+    } else if (checkCount > 30) { // 15秒后停止检查
+      clearInterval(checkInterval);
+      console.log('不蒜子统计加载超时');
+    }
+  }, 500);
+  
+  // 页面可见性变化时重新检查数据
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      setTimeout(formatBusuanziNumbers, 1000);
+    }
+  });
+  
+  console.log('不蒜子统计部件初始化完成');
+});
 </script>
 
 <style>
@@ -324,5 +437,121 @@ img.lazy {
 
 img.lazy.loaded {
   opacity: 1;
+}
+
+/* 访问统计部件样式 */
+.stats-widget {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 999;
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+  padding: 15px;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  max-width: 280px;
+}
+
+.stats-widget:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-large);
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--code-bg);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.stats-item:hover {
+  background: var(--tertiary);
+}
+
+.stats-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.stats-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stats-number {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.stats-label {
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .stats-widget {
+    bottom: 70px;
+    right: 15px;
+    left: 15px;
+    max-width: none;
+    position: fixed;
+  }
+  
+  .stats-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .stats-item {
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+    padding: 8px 4px;
+    gap: 4px;
+  }
+  
+  .stats-info {
+    align-items: center;
+  }
+  
+  .stats-icon {
+    font-size: 16px;
+  }
+  
+  .stats-number {
+    font-size: 14px;
+  }
+  
+  .stats-label {
+    font-size: 10px;
+  }
+}
+
+/* 隐藏状态 */
+.stats-widget.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
 }
 </style>

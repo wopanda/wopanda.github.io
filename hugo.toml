@@ -63,6 +63,9 @@ ShowSummary = true
 # 显示全文
 ShowFullTextinRSS = true
 
+# Google Analytics
+googleAnalytics = "G-MB51D59HR8"
+
 # SEO优化
 [params.fuseOpts]
 isCaseSensitive = false
@@ -239,5 +242,5 @@ section = ["HTML", "RSS"]
   lang = "zh-CN"
 
 # 统计分析（可选）
-# googleAnalytics = "G-XXXXXXXXXX"
+googleAnalytics = "G-MB51D59HR8"  # 你的Google Analytics测量ID
 # baiduAnalytics = "xxxxxxxxxxxxxxxxx"
