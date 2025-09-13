@@ -123,10 +123,10 @@ weight = 40
 [taxonomies]
 tag = "tags"
 
-# 输出格式（移除JSON搜索索引）
+# 输出格式（添加JSON以修复列表重复问题）
 [outputs]
-home = ["HTML", "RSS"]
-section = ["HTML", "RSS"]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML", "RSS", "JSON"]
 
 # 隐私设置
 [privacy]
