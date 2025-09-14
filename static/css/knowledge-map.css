@@ -687,9 +687,11 @@
   }
   
   .km-territory-header {
-    top: -12px;
-    left: 16px;
-    max-width: calc(100% - 32px);
+    position: static; /* 移动端改为常规流布局，避免与网格重叠 */
+    top: auto;
+    left: auto;
+    margin: 8px 16px 0 16px;
+    max-width: 100%;
   }
   
   .km-territory-title {
@@ -697,7 +699,7 @@
   }
   
   .km-territory-grid {
-    padding: 56px 16px 16px 16px; /* 增加顶部留白，避免标题与格子重叠 */
+    padding: 16px 16px 16px 16px; /* 标题顺序布局后，上边距恢复适中 */
     gap: 4px;
   }
   
@@ -736,8 +738,16 @@
     min-height: 240px;
   }
   
+  .km-territory-header {
+    position: static;
+    top: auto;
+    left: auto;
+    margin: 8px 12px 0 12px;
+    max-width: 100%;
+  }
+
   .km-territory-grid {
-    padding: 60px 12px 12px 12px; /* 小屏进一步增加顶部间距 */
+    padding: 12px; /* 紧凑留白，不再与标题重叠 */
   }
 }
 
