@@ -702,6 +702,11 @@
     padding: 16px 16px 16px 16px; /* 标题顺序布局后，上边距恢复适中 */
     gap: 4px;
   }
+
+  /* 双保险：无论标题是否绝对定位，均保证与网格有间距 */
+  .km-territory-header + .km-territory-grid {
+    margin-top: 12px;
+  }
   
   .km-grid-cell {
     width: 20px;
@@ -748,6 +753,10 @@
 
   .km-territory-grid {
     padding: 12px; /* 紧凑留白，不再与标题重叠 */
+  }
+
+  .km-territory-header + .km-territory-grid {
+    margin-top: 10px;
   }
 }
 
