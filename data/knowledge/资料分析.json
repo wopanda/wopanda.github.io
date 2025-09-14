@@ -1,0 +1,161 @@
+{
+  "name": "资料分析",
+  "type": "module",
+  "children": [],
+  "knowledgePoints": [
+    {
+      "name": "转化能力",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_001",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "倍数类",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_002",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "乘积增长率",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_003",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "读题能力",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_004",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "隔年增长率",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_005",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "混合模型",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_006",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "基期比较",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_007",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "基期比重",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_008",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "基期量",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_009",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "两期比重",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_010",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "年均增长率",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_011",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "平均数",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_012",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "求和(差)",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_013",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "速算能力",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_014",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "特殊考点",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_015",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "现期比重",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_016",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "现期量",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_017",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "一般增长率",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_018",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "增量比较",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_019",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "增速比较",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_020",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "增长量",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_021",
+      "parentModule": "资料分析"
+    },
+    {
+      "name": "找数能力",
+      "type": "knowledge",
+      "status": "unlearned",
+      "id": "zl_022",
+      "parentModule": "资料分析"
+    }
+  ]
+}

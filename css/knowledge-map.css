@@ -1,0 +1,983 @@
+/* 知识地图 - 现代化重构版本 */
+
+:root {
+  /* 现代配色方案 */
+  --km-primary: #6366f1;
+  --km-primary-light: #818cf8;
+  --km-primary-dark: #4f46e5;
+  --km-secondary: #ec4899;
+  --km-accent: #06b6d4;
+  --km-success: #10b981;
+  --km-warning: #f59e0b;
+  --km-danger: #ef4444;
+  
+  /* 中性色调 */
+  --km-gray-50: #f9fafb;
+  --km-gray-100: #f3f4f6;
+  --km-gray-200: #e5e7eb;
+  --km-gray-300: #d1d5db;
+  --km-gray-400: #9ca3af;
+  --km-gray-500: #6b7280;
+  --km-gray-600: #4b5563;
+  --km-gray-700: #374151;
+  --km-gray-800: #1f2937;
+  --km-gray-900: #111827;
+  
+  /* 阴影系统 */
+  --km-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --km-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --km-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --km-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --km-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --km-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* 圆角系统 */
+  --km-radius-sm: 6px;
+  --km-radius-md: 8px;
+  --km-radius-lg: 12px;
+  --km-radius-xl: 16px;
+  --km-radius-2xl: 24px;
+  
+  /* 动画曲线 */
+  --km-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --km-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --km-ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* 全局重置和基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+/* 加载提示 - 现代化设计 */
+.knowledge-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(248, 250, 252, 0.8) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: var(--km-radius-2xl);
+  margin: 20px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--km-shadow-xl);
+}
+
+.knowledge-loading::before {
+  content: '🧠';
+  font-size: 3rem;
+  margin-bottom: 16px;
+  animation: pulse 2s infinite;
+}
+
+/* 主容器 */
+#knowledge-map-container {
+  margin: 20px 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(30px);
+  border-radius: var(--km-radius-2xl);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--km-shadow-2xl);
+}
+
+/* 工具栏 - 玻璃拟态设计 */
+.km-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.95) 0%, 
+    rgba(129, 140, 248, 0.9) 50%,
+    rgba(236, 72, 153, 0.85) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-toolbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+/* 标题区域：返回按钮与标题横向排列 */
+.km-title-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.km-title-area h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffffff, #f0f4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 新的返回链接样式，确保不会被渐变文字影响 */
+.km-back-link {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-right: 16px;
+  border-radius: var(--km-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-text-fill-color: #ffffff; /* 强制覆盖渐变文字样式 */
+}
+
+.km-back-link:hover {
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: var(--km-shadow-sm);
+}
+
+.km-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+/* 视图切换按钮 */
+.km-view-switch { margin-left: 12px; }
+.km-switch-btn {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.km-switch-btn.active { background: rgba(255,255,255,0.32); box-shadow: var(--km-shadow-sm); }
+
+/* 矩阵关系图 */
+.km-matrix { width: 100%; overflow: auto; background: #fff; border-radius: var(--km-radius-xl); box-shadow: var(--km-shadow-lg); }
+.km-matrix-row { display: grid; grid-template-columns: 220px repeat(3, 1fr); align-items: stretch; }
+.km-matrix-header { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1)); font-weight: 700; }
+.km-matrix-cell { padding: 14px 16px; border-bottom: 1px solid var(--km-gray-200); border-right: 1px solid var(--km-gray-200); display:flex; align-items:center; justify-content:center; }
+.km-matrix-cell.cell-fixed { justify-content: flex-start; font-weight: 600; color: var(--km-gray-700); }
+.km-matrix-row:last-child .km-matrix-cell { border-bottom: none; }
+.km-matrix-row .km-matrix-cell:last-child { border-right: none; }
+.km-matrix-count { font-weight: 700; }
+
+/* 热力配色 */
+.km-matrix-cell.heat-learned { background: rgba(16,185,129,0.08); color: #065f46; }
+.km-matrix-cell.heat-review { background: rgba(245,158,11,0.08); color: #92400e; }
+.km-matrix-cell.heat-unlearned { background: rgba(107,114,128,0.06); color: #374151; }
+.km-matrix-cell:hover { filter: brightness(1.03); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04); cursor:pointer; }
+
+/* 矩阵详情模态 */
+.km-matrix-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; z-index: 1000; }
+.km-matrix-modal-content { width: min(920px, 90vw); max-height: 80vh; overflow: auto; background:#fff; border-radius: 14px; box-shadow: var(--km-shadow-2xl); }
+.km-matrix-modal-header { display:flex; justify-content: space-between; align-items:center; padding: 14px 16px; border-bottom: 1px solid var(--km-gray-200); font-weight: 700; }
+.km-matrix-modal-body { padding: 16px; display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.km-matrix-close { background:#ef4444; color:#fff; border:none; border-radius:8px; padding:6px 10px; cursor:pointer; }
+.km-empty { color: var(--km-gray-500); padding: 20px; }
+
+.km-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.95);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--km-radius-lg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s var(--km-ease-out);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.km-stat-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: var(--km-shadow-md);
+}
+
+/* 返回按钮 - 现代化设计 */
+.km-back-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: var(--km-primary);
+  padding: 10px 20px;
+  border-radius: var(--km-radius-lg);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-right: 16px;
+  transition: all 0.3s var(--km-ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--km-shadow-sm);
+}
+
+.km-back-btn:hover {
+  background: white;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--km-shadow-lg);
+  color: var(--km-primary-dark);
+}
+
+/* 箭头现在直接在JavaScript中设置，不需要伪元素 */
+
+/* 主内容区域 */
+.km-main-content {
+  padding: 32px;
+  background: linear-gradient(135deg, 
+    rgba(249, 250, 251, 0.9) 0%, 
+    rgba(243, 244, 246, 0.8) 100%);
+  min-height: 500px;
+}
+
+/* 战略地图容器 - 改进的网格布局 */
+.km-battle-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 模块领土 - 现代卡片设计 */
+.km-territory {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--km-radius-xl);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  box-shadow: var(--km-shadow-lg);
+  transition: all 0.4s var(--km-ease-out);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.km-territory::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--km-primary) 0%, 
+    var(--km-accent) 50%, 
+    var(--km-secondary) 100%);
+}
+
+.km-territory-clickable {
+  cursor: pointer;
+  transition: all 0.4s var(--km-ease-out);
+}
+
+.km-territory-clickable:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--km-shadow-2xl);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.km-territory-clickable::after {
+  content: '点击查看详情';
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 0.75rem;
+  color: var(--km-gray-500);
+  opacity: 0;
+  transition: all 0.3s var(--km-ease-out);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: var(--km-radius-sm);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.km-territory-clickable:hover::after {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+/* 领土标题 */
+.km-territory-header {
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  background: linear-gradient(135deg, 
+    var(--km-primary) 0%, 
+    var(--km-primary-light) 100%);
+  padding: 10px 20px;
+  border-radius: var(--km-radius-xl);
+  box-shadow: var(--km-shadow-lg);
+  z-index: 10;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  max-width: calc(100% - 48px);
+  white-space: nowrap;
+}
+
+/* 移动端专用：当容器有 km-mobile 类时，标题进入文流并增加分隔 */
+.km-territory.km-mobile .km-territory-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 8px 12px 0 12px;
+  max-width: 100%;
+}
+
+.km-territory.km-mobile .km-territory-grid {
+  padding: 12px 12px 12px 12px;
+}
+
+/* 骨架屏样式：降低首次显示的“加载中”感知 */
+.km-skeleton {
+  position: relative;
+  overflow: hidden;
+}
+.km-skeleton-title::after,
+.km-skeleton-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 100%);
+  animation: km-shimmer 1.4s infinite;
+}
+.km-skeleton-title {
+  color: transparent !important;
+  min-height: 18px;
+}
+.km-skeleton-grid {
+  min-height: 120px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+}
+@keyframes km-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.km-territory-title {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* 知识点网格 - 改进的热力图设计 */
+.km-territory-grid {
+  display: grid;
+  gap: 6px;
+  padding: 48px 20px 20px 20px;
+  width: 100%;
+  min-height: 240px;
+  flex: 1;
+  align-content: start;
+  justify-content: center;
+}
+
+/* 网格单元格 - 现代热力图风格 */
+.km-grid-cell {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: var(--km-radius-sm);
+  cursor: default;
+  transition: all 0.3s var(--km-ease-out);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--km-shadow-sm);
+}
+
+.km-grid-cell:hover {
+  transform: scale(1.15) translateY(-2px);
+  z-index: 20;
+  box-shadow: var(--km-shadow-lg);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 改进的状态颜色 - 科学的颜色梯度 */
+.km-grid-cell.status-learned {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #047857;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.km-grid-cell.status-learned:hover {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.km-grid-cell.status-review {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #b45309;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.km-grid-cell.status-review:hover {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+.km-grid-cell.status-unlearned {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  border-color: #9ca3af;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 2px 4px rgba(156, 163, 175, 0.2);
+}
+
+.km-grid-cell.status-unlearned:hover {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 8px 25px rgba(156, 163, 175, 0.3);
+}
+
+/* 模块详细视图样式 */
+.km-submodule-detail {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  border-radius: var(--km-radius-xl);
+  margin-bottom: 32px;
+  box-shadow: var(--km-shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+
+.km-submodule-header {
+  background: linear-gradient(135deg, 
+    var(--km-accent) 0%, 
+    var(--km-secondary) 100%);
+  color: white;
+  padding: 20px 24px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.km-submodule-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+.km-submodule-progress {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: var(--km-radius-lg);
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.km-knowledge-section-title {
+  background: linear-gradient(135deg, 
+    var(--km-gray-100) 0%, 
+    var(--km-gray-50) 100%);
+  padding: 20px 24px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--km-gray-800);
+  border-bottom: 2px solid var(--km-gray-200);
+}
+
+.km-knowledge-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 24px;
+}
+
+.km-knowledge-point-detail {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(248, 250, 252, 0.8) 100%);
+  border: 2px solid var(--km-gray-200);
+  border-radius: var(--km-radius-lg);
+  padding: 16px;
+  transition: all 0.3s var(--km-ease-out);
+  cursor: default;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-knowledge-point-detail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--km-gray-300);
+  transition: all 0.3s var(--km-ease-out);
+}
+
+.km-knowledge-point-detail:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--km-shadow-xl);
+  border-color: var(--km-primary);
+}
+
+.km-knowledge-point-detail.learned::before {
+  background: linear-gradient(90deg, var(--km-success), #06d6a0);
+}
+
+.km-knowledge-point-detail.review::before {
+  background: linear-gradient(90deg, var(--km-warning), #ffa726);
+}
+
+.km-knowledge-point-detail.unlearned::before {
+  background: linear-gradient(90deg, var(--km-gray-400), var(--km-gray-500));
+}
+
+.km-knowledge-point-detail.learned {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.05) 0%, 
+    rgba(16, 185, 129, 0.1) 100%);
+}
+
+.km-knowledge-point-detail.review {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.05) 0%, 
+    rgba(245, 158, 11, 0.1) 100%);
+}
+
+.km-knowledge-point-detail.unlearned {
+  border-color: rgba(156, 163, 175, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(156, 163, 175, 0.05) 0%, 
+    rgba(156, 163, 175, 0.1) 100%);
+}
+
+.km-point-name {
+  font-weight: 600;
+  color: var(--km-gray-800);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.km-point-status {
+  font-size: 0.85rem;
+  color: var(--km-gray-600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.km-knowledge-point-detail.learned .km-point-status::before {
+  content: '🟢';
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.km-knowledge-point-detail.review .km-point-status::before {
+  content: '🟡';
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.km-knowledge-point-detail.unlearned .km-point-status::before {
+  content: '⚫';
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.km-territory {
+  animation: slideInUp 0.6s var(--km-ease-out) both;
+}
+
+.km-territory:nth-child(1) { animation-delay: 0.1s; }
+.km-territory:nth-child(2) { animation-delay: 0.2s; }
+.km-territory:nth-child(3) { animation-delay: 0.3s; }
+.km-territory:nth-child(4) { animation-delay: 0.4s; }
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .km-battle-map {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .km-battle-map {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 12px;
+  }
+  
+  .km-territory {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .km-toolbar {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 20px 24px;
+  }
+  
+  .km-stats {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .km-stat-item {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  
+  .km-main-content {
+    padding: 16px;
+  }
+  
+  .km-battle-map {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 8px;
+  }
+  
+  .km-territory {
+    min-height: 300px;
+  }
+  
+  .km-territory-header {
+    position: relative !important; /* 强制取消绝对定位，避免与网格重叠 */
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+    margin: 8px 16px 0 16px;
+    max-width: 100%;
+  }
+  
+  .km-territory-title {
+    font-size: 0.85rem;
+  }
+  
+  .km-territory-grid {
+    padding: 16px 16px 16px 16px; /* 标题顺序布局后，上边距恢复适中 */
+    gap: 4px;
+  }
+
+  /* 双保险：无论标题是否绝对定位，均保证与网格有间距 */
+  .km-territory-header + .km-territory-grid {
+    margin-top: 12px;
+  }
+  
+  .km-grid-cell {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+  }
+  
+  .km-knowledge-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .km-territory-clickable::after {
+    display: none;
+  }
+  
+  .km-title-area h3 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .km-toolbar {
+    padding: 16px 20px;
+  }
+  
+  .km-main-content {
+    padding: 16px;
+  }
+  
+  .km-territory {
+    min-height: 240px;
+  }
+  
+  .km-territory-header {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+    margin: 8px 12px 0 12px;
+    max-width: 100%;
+  }
+
+  .km-territory-grid {
+    padding: 12px; /* 紧凑留白，不再与标题重叠 */
+  }
+
+  .km-territory-header + .km-territory-grid {
+    margin-top: 10px;
+  }
+}
+
+/* 高级Tooltip样式 */
+.km-tooltip {
+  position: fixed;
+  z-index: 1000;
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(31, 41, 55, 0.95) 100%);
+  color: white;
+  padding: 12px 16px;
+  border-radius: var(--km-radius-lg);
+  box-shadow: var(--km-shadow-2xl);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-width: 250px;
+  opacity: 0;
+  transform: translateY(8px) scale(0.95);
+  transition: all 0.2s var(--km-ease-out);
+  pointer-events: none;
+}
+
+.km-tooltip-show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.km-tooltip-bottom {
+  transform: translateY(-8px) scale(0.95);
+}
+
+.km-tooltip-bottom.km-tooltip-show {
+  transform: translateY(0) scale(1);
+}
+
+.km-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.9);
+}
+
+.km-tooltip-bottom::before {
+  top: -6px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 6px solid rgba(0, 0, 0, 0.9);
+}
+
+.km-tooltip-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.km-tooltip-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
+}
+
+.km-tooltip-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.km-tooltip-status-indicator.status-learned {
+  background: var(--km-success);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.km-tooltip-status-indicator.status-review {
+  background: var(--km-warning);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.km-tooltip-status-indicator.status-unlearned {
+  background: var(--km-gray-400);
+  box-shadow: 0 0 8px rgba(156, 163, 175, 0.4);
+}
+
+.km-tooltip-module {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* 页面级动画增强 */
+.km-battle-map {
+  animation: fadeInUp 0.6s var(--km-ease-out) both;
+}
+
+.km-submodule-detail {
+  animation: slideInUp 0.5s var(--km-ease-out) both;
+}
+
+.km-submodule-detail:nth-child(1) { animation-delay: 0.1s; }
+.km-submodule-detail:nth-child(2) { animation-delay: 0.15s; }
+.km-submodule-detail:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 改进的滚动条样式 */
+.km-main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.km-main-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--km-radius-sm);
+}
+
+.km-main-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--km-primary), var(--km-accent));
+  border-radius: var(--km-radius-sm);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.km-main-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--km-primary-dark), var(--km-secondary));
+  background-clip: content-box;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --km-gray-50: #1f2937;
+    --km-gray-100: #374151;
+    --km-gray-200: #4b5563;
+    --km-gray-300: #6b7280;
+    --km-gray-800: #f9fafb;
+    --km-gray-900: #ffffff;
+  }
+  
+  .km-tooltip {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(248, 250, 252, 0.9) 100%);
+    color: var(--km-gray-800);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .km-tooltip::before {
+    border-top-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .km-tooltip-bottom::before {
+    border-bottom-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .km-tooltip-title {
+    color: var(--km-gray-900);
+  }
+  
+  .km-tooltip-status {
+    color: var(--km-gray-600);
+  }
+}

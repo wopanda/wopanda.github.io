@@ -1,0 +1,94 @@
+{
+  "name": "判断推理",
+  "type": "module",
+  "children": [
+    {
+      "name": "图形推理",
+      "type": "submodule",
+      "knowledgePoints": [
+        {"name":"平移","type":"knowledge","status":"learned","id":"lj_001","parentModule":"判断推理","parentSubModule":"图形推理","category":"位置规律"},
+        {"name":"旋转","type":"knowledge","status":"learned","id":"lj_002","parentModule":"判断推理","parentSubModule":"图形推理","category":"位置规律"},
+        {"name":"翻转","type":"knowledge","status":"learned","id":"lj_003","parentModule":"判断推理","parentSubModule":"图形推理","category":"位置规律"},
+        {"name":"相邻比较","type":"knowledge","status":"learned","id":"lj_004","parentModule":"判断推理","parentSubModule":"图形推理","category":"位置规律"},
+        {"name":"遍历","type":"knowledge","status":"learned","id":"lj_005","parentModule":"判断推理","parentSubModule":"图形推理","category":"样式规律"},
+        {"name":"加减同异","type":"knowledge","status":"learned","id":"lj_006","parentModule":"判断推理","parentSubModule":"图形推理","category":"样式规律"},
+        {"name":"黑白运算","type":"knowledge","status":"learned","id":"lj_007","parentModule":"判断推理","parentSubModule":"图形推理","category":"样式规律"},
+        {"name":"定义新运算","type":"knowledge","status":"learned","id":"lj_008","parentModule":"判断推理","parentSubModule":"图形推理","category":"样式规律"},
+        {"name":"标记","type":"knowledge","status":"learned","id":"lj_009","parentModule":"判断推理","parentSubModule":"图形推理","category":"样式规律"},
+        {"name":"对称性","type":"knowledge","status":"learned","id":"lj_010","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
+        {"name":"曲直性","type":"knowledge","status":"learned","id":"lj_011","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
+        {"name":"开闭性","type":"knowledge","status":"learned","id":"lj_012","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
+        {"name":"面","type":"knowledge","status":"learned","id":"lj_013","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"线","type":"knowledge","status":"unlearned","id":"lj_014","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"点","type":"knowledge","status":"unlearned","id":"lj_015","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"角","type":"knowledge","status":"unlearned","id":"lj_016","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"元素","type":"knowledge","status":"unlearned","id":"lj_017","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"笔画","type":"knowledge","status":"unlearned","id":"lj_018","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"图形间关系","type":"knowledge","status":"unlearned","id":"lj_019","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"部分数","type":"knowledge","status":"unlearned","id":"lj_020","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"六面体","type":"knowledge","status":"unlearned","id":"lj_021","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"},
+        {"name":"四面体","type":"knowledge","status":"unlearned","id":"lj_022","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"},
+        {"name":"三视图","type":"knowledge","status":"unlearned","id":"lj_023","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"},
+        {"name":"截面图","type":"knowledge","status":"unlearned","id":"lj_024","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"},
+        {"name":"立体拼合","type":"knowledge","status":"unlearned","id":"lj_025","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"},
+        {"name":"平面拼合/折纸","type":"knowledge","status":"unlearned","id":"lj_026","parentModule":"判断推理","parentSubModule":"图形推理","category":"空间图形"}
+      ]
+    },
+    {
+      "name": "加强削弱",
+      "type": "submodule",
+      "knowledgePoints": [
+        {"name":"二句式推理-补全逻辑","type":"knowledge","status":"learned","id":"lj_019","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"二句式推理-建立联系","type":"knowledge","status":"learned","id":"lj_020","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"二句式推理-指出相同或不同","type":"knowledge","status":"learned","id":"lj_021","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由因推果-建立联系","type":"knowledge","status":"learned","id":"lj_023","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由因推果-直接引入他因","type":"knowledge","status":"learned","id":"lj_024","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由因推果-前真后假","type":"knowledge","status":"learned","id":"lj_025","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由因推果-直接举例子","type":"knowledge","status":"learned","id":"lj_026","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由因推果-直接反驳论据或结论","type":"knowledge","status":"learned","id":"lj_027","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"由果推因","type":"knowledge","status":"learned","id":"lj_028","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"秒杀思路","type":"knowledge","status":"learned","id":"lj_029","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"解释题型","type":"knowledge","status":"learned","id":"lj_030","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"选非题型","type":"knowledge","status":"learned","id":"lj_031","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"引入前提","type":"knowledge","status":"learned","id":"lj_032","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"结论推出","type":"knowledge","status":"learned","id":"lj_033","parentModule":"判断推理","parentSubModule":"加强削弱"},
+        {"name":"评价题型","type":"knowledge","status":"learned","id":"lj_034","parentModule":"判断推理","parentSubModule":"加强削弱"}
+      ]
+    },
+    {
+      "name": "类比推理",
+      "type": "submodule",
+      "knowledgePoints": [
+        {"name":"比喻义、象征义","type":"knowledge","status":"learned","id":"lj_035","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"同字不同义","type":"knowledge","status":"learned","id":"lj_036","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若全同","type":"knowledge","status":"learned","id":"lj_037","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若并列","type":"knowledge","status":"learned","id":"lj_038","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若包含","type":"knowledge","status":"learned","id":"lj_039","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若交叉","type":"knowledge","status":"learned","id":"lj_040","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"对应关系","type":"knowledge","status":"learned","id":"lj_041","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若存在相互作用，则看因果、方式及箭头","type":"knowledge","status":"learned","id":"lj_042","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"若行为（动词）多，先看顺序再看主客体","type":"knowledge","status":"learned","id":"lj_043","parentModule":"判断推理","parentSubModule":"类比推理"},
+        {"name":"语法关系","type":"knowledge","status":"learned","id":"lj_044","parentModule":"判断推理","parentSubModule":"类比推理"}
+      ]
+    },
+    {
+      "name": "形式逻辑",
+      "type": "submodule",
+      "knowledgePoints": [
+        {"name":"逻辑连词与符号","type":"knowledge","status":"unlearned","id":"lj_045","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"形式逻辑基础"},
+        {"name":"逻辑等价变换","type":"knowledge","status":"unlearned","id":"lj_046","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"形式逻辑基础"},
+        {"name":"代入推理","type":"knowledge","status":"unlearned","id":"lj_047","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"代入事实真推理"},
+        {"name":"命题真假判定","type":"knowledge","status":"unlearned","id":"lj_048","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"判断逻辑真假"},
+        {"name":"矛盾法","type":"knowledge","status":"unlearned","id":"lj_049","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"推矛盾找事实真"},
+        {"name":"两难推理","type":"knowledge","status":"unlearned","id":"lj_050","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"推矛盾找事实真"},
+        {"name":"代入验证法","type":"knowledge","status":"unlearned","id":"lj_051","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"代入验证找矛盾"},
+        {"name":"真假话问题","type":"knowledge","status":"unlearned","id":"lj_052","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"真话假话"},
+        {"name":"直言命题","type":"knowledge","status":"unlearned","id":"lj_053","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"真话假话"},
+        {"name":"一一对应","type":"knowledge","status":"unlearned","id":"lj_054","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"一一对应"},
+        {"name":"文氏图","type":"knowledge","status":"unlearned","id":"lj_055","parentModule":"判断推理","parentSubModule":"形式逻辑","category":"文氏图"}
+      ]
+    }
+  ],
+  "knowledgePoints": []
+}
+
