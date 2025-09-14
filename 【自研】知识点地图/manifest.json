@@ -1,0 +1,11 @@
+{
+  "id": "knowledge-map",
+  "name": "知识点地图",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "行测学习进度可视化热力图插件",
+  "author": "Vibe Coder",
+  "authorUrl": "",
+  "fundingUrl": "",
+  "isDesktopOnly": false
+}

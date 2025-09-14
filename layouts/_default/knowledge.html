@@ -1,0 +1,37 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <!-- 移除重复的标题显示 -->
+
+  <!-- 知识地图内容区域 -->
+  <div class="post-content">
+    {{- if .Content }}
+    <div class="knowledge-intro">
+      {{ .Content }}
+    </div>
+    {{- end }}
+    
+    <!-- 知识地图容器 -->
+    <div id="knowledge-map-container">
+      <div class="knowledge-loading">
+        🧠 正在加载知识地图...
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<!-- 引入知识地图的CSS和JS -->
+<link rel="stylesheet" href="/css/knowledge-map.css">
+<script src="/js/knowledge-map-renderer.js"></script>
+<script>
+  // 页面加载完成后初始化知识地图
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof KnowledgeMapRenderer !== 'undefined') {
+      const renderer = new KnowledgeMapRenderer('knowledge-map-container');
+      renderer.init();
+    }
+  });
+</script>
+
+{{- end }}{{/* end main */}}

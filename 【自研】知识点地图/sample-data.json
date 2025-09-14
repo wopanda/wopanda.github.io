@@ -1,0 +1,461 @@
+{
+  "knowledgeData": [
+    {
+      "name": "判断推理_图形推理",
+      "type": "module",
+      "children": [],
+      "knowledgePoints": [
+        {
+          "name": "平移",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "gx_001",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "翻转与旋转",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "gx_002",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "加减同异",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "gx_003",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "黑白运算",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "gx_004",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "标记",
+          "type": "knowledge",
+          "status": "review",
+          "id": "gx_005",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "遍历",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_006",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "对称",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_007",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "曲直",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_008",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "开闭",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_009",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "面",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_010",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "笔画",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_011",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "点",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_012",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "线",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_013",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "元素",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_014",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "直角",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_015",
+          "parentModule": "判断推理_图形推理"
+        },
+        {
+          "name": "图形间位置",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "gx_016",
+          "parentModule": "判断推理_图形推理"
+        }
+      ]
+    },
+    {
+      "name": "判断推理_逻辑判断",
+      "type": "module",
+      "children": [
+        {
+          "name": "必然性推理",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "直言命题",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "lj_001",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "必然性推理"
+            },
+            {
+              "name": "复言命题",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "lj_002",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "必然性推理"
+            },
+            {
+              "name": "模态命题",
+              "type": "knowledge",
+              "status": "review",
+              "id": "lj_003",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "必然性推理"
+            }
+          ]
+        },
+        {
+          "name": "可能性推理",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "加强论证",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "lj_004",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "可能性推理"
+            },
+            {
+              "name": "削弱论证",
+              "type": "knowledge",
+              "status": "review",
+              "id": "lj_005",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "可能性推理"
+            },
+            {
+              "name": "前提假设",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "lj_006",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "可能性推理"
+            },
+            {
+              "name": "解释说明",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "lj_007",
+              "parentModule": "判断推理_逻辑判断",
+              "parentSubModule": "可能性推理"
+            }
+          ]
+        }
+      ],
+      "knowledgePoints": [
+        {
+          "name": "逻辑基础",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "lj_base_001",
+          "parentModule": "判断推理_逻辑判断"
+        }
+      ]
+    },
+    {
+      "name": "数量关系",
+      "type": "module",
+      "children": [
+        {
+          "name": "工程问题",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "基础工程问题",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "gc_001",
+              "parentModule": "数量关系",
+              "parentSubModule": "工程问题"
+            },
+            {
+              "name": "多人合作",
+              "type": "knowledge",
+              "status": "review",
+              "id": "gc_002",
+              "parentModule": "数量关系",
+              "parentSubModule": "工程问题"
+            },
+            {
+              "name": "周期性工程",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "gc_003",
+              "parentModule": "数量关系",
+              "parentSubModule": "工程问题"
+            },
+            {
+              "name": "水管进出水",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "gc_004",
+              "parentModule": "数量关系",
+              "parentSubModule": "工程问题"
+            }
+          ]
+        },
+        {
+          "name": "行程问题",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "相遇问题",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "xc_001",
+              "parentModule": "数量关系",
+              "parentSubModule": "行程问题"
+            },
+            {
+              "name": "追及问题",
+              "type": "knowledge",
+              "status": "review",
+              "id": "xc_002",
+              "parentModule": "数量关系",
+              "parentSubModule": "行程问题"
+            },
+            {
+              "name": "环形跑道",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "xc_003",
+              "parentModule": "数量关系",
+              "parentSubModule": "行程问题"
+            },
+            {
+              "name": "流水行船",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "xc_004",
+              "parentModule": "数量关系",
+              "parentSubModule": "行程问题"
+            }
+          ]
+        },
+        {
+          "name": "利润问题",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "基础利润",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "lr_001",
+              "parentModule": "数量关系",
+              "parentSubModule": "利润问题"
+            },
+            {
+              "name": "打折销售",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "lr_002",
+              "parentModule": "数量关系",
+              "parentSubModule": "利润问题"
+            }
+          ]
+        }
+      ],
+      "knowledgePoints": [
+        {
+          "name": "基础运算",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "sl_001",
+          "parentModule": "数量关系"
+        },
+        {
+          "name": "比例计算",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "sl_002",
+          "parentModule": "数量关系"
+        }
+      ]
+    },
+    {
+      "name": "言语理解",
+      "type": "module",
+      "children": [
+        {
+          "name": "逻辑填空",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "词义辨析",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "tk_001",
+              "parentModule": "言语理解",
+              "parentSubModule": "逻辑填空"
+            },
+            {
+              "name": "语境分析",
+              "type": "knowledge",
+              "status": "review",
+              "id": "tk_002",
+              "parentModule": "言语理解",
+              "parentSubModule": "逻辑填空"
+            },
+            {
+              "name": "成语辨析",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "tk_003",
+              "parentModule": "言语理解",
+              "parentSubModule": "逻辑填空"
+            }
+          ]
+        },
+        {
+          "name": "片段阅读",
+          "type": "submodule",
+          "knowledgePoints": [
+            {
+              "name": "主旨概括",
+              "type": "knowledge",
+              "status": "learned",
+              "id": "pd_001",
+              "parentModule": "言语理解",
+              "parentSubModule": "片段阅读"
+            },
+            {
+              "name": "意图判断",
+              "type": "knowledge",
+              "status": "review",
+              "id": "pd_002",
+              "parentModule": "言语理解",
+              "parentSubModule": "片段阅读"
+            },
+            {
+              "name": "细节理解",
+              "type": "knowledge",
+              "status": "unlearned",
+              "id": "pd_003",
+              "parentModule": "言语理解",
+              "parentSubModule": "片段阅读"
+            }
+          ]
+        }
+      ],
+      "knowledgePoints": [
+        {
+          "name": "语句表达",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "yy_003",
+          "parentModule": "言语理解"
+        }
+      ]
+    },
+    {
+      "name": "资料分析",
+      "type": "module",
+      "children": [],
+      "knowledgePoints": [
+        {
+          "name": "增长率计算",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "zl_001",
+          "parentModule": "资料分析"
+        },
+        {
+          "name": "比重计算",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "zl_002",
+          "parentModule": "资料分析"
+        },
+        {
+          "name": "平均数计算",
+          "type": "knowledge",
+          "status": "review",
+          "id": "zl_003",
+          "parentModule": "资料分析"
+        },
+        {
+          "name": "倍数计算",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "zl_004",
+          "parentModule": "资料分析"
+        },
+        {
+          "name": "间隔增长",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "zl_005",
+          "parentModule": "资料分析"
+        },
+        {
+          "name": "年均增长",
+          "type": "knowledge",
+          "status": "unlearned",
+          "id": "zl_006",
+          "parentModule": "资料分析"
+        }
+      ]
+    }
+  ],
+  "todayProgress": {
+    "2024-01-15": {
+      "gx_001": "learned",
+      "gx_002": "learned",
+      "gx_005": "review",
+      "lj_003": "review",
+      "tk_002": "review"
+    }
+  },
+  "lastUpdate": "2024-01-15T14:30:00.000Z",
+  "version": "1.0"
+}

@@ -1,0 +1,109 @@
+{
+  "name": "言语理解与表达",
+  "type": "module",
+  "children": [
+    {
+      "name": "逻辑填空",
+      "type": "submodule",
+      "knowledgePoints": [
+        {
+          "name": "转折关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_001",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "因果关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_002",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "并列关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_003",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "递进关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_004",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "解释说明",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_005",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "形象化表达",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_006",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "主题词对应",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_007",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "前后呼应",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_008",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "词义侧重",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_009",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "搭配对象",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_010",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "程度轻重",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_011",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "感情色彩",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_012",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        }
+      ]
+    }
+  ],
+  "knowledgePoints": []
+}

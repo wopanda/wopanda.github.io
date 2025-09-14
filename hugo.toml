@@ -114,6 +114,12 @@ url = "/tags/"
 weight = 30
 
 [[menu.main]]
+identifier = "knowledge"
+name = "知识地图"
+url = "/knowledge/"
+weight = 45
+
+[[menu.main]]
 identifier = "about"
 name = "关于"
 url = "/about/"

@@ -1,0 +1,127 @@
+{
+  "name": "言语理解与表达",
+  "type": "module",
+  "children": [
+    {
+      "name": "逻辑填空",
+      "type": "submodule",
+      "knowledgePoints": [
+        {
+          "name": "转折关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_001",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "因果关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_002",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "并列关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_003",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "递进关系",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_004",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "解释说明",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_005",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "形象化表达",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_006",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "主题词对应",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_007",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "前后呼应",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_008",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "词义侧重",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_009",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "搭配对象",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_010",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "程度轻重",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_011",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        },
+        {
+          "name": "感情色彩",
+          "type": "knowledge",
+          "status": "learned",
+          "id": "yy_012",
+          "parentModule": "言语理解与表达",
+          "parentSubModule": "逻辑填空"
+        }
+      ]
+    },
+    {
+      "name": "片段阅读",
+      "type": "submodule",
+      "knowledgePoints": [
+        {"name":"结构分析-转折","type":"knowledge","status":"unlearned","id":"yy_013","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"结构分析-因果","type":"knowledge","status":"unlearned","id":"yy_014","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"结构分析-必要条件","type":"knowledge","status":"unlearned","id":"yy_015","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"结构分析-并列","type":"knowledge","status":"unlearned","id":"yy_016","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"内容分析-主题词","type":"knowledge","status":"unlearned","id":"yy_017","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"间接定位-排除非重点","type":"knowledge","status":"unlearned","id":"yy_018","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"特殊文段-对策","type":"knowledge","status":"unlearned","id":"yy_019","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"中心理解题"},
+        {"name":"错误类型-无中生有","type":"knowledge","status":"unlearned","id":"yy_020","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"细节判断题"},
+        {"name":"错误类型-偷换概念","type":"knowledge","status":"unlearned","id":"yy_021","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"细节判断题"},
+        {"name":"错误类型-偷换逻辑","type":"knowledge","status":"unlearned","id":"yy_022","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"细节判断题"},
+        {"name":"错误类型-与文意相悖","type":"knowledge","status":"unlearned","id":"yy_023","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"细节判断题"},
+        {"name":"解题技巧-选项特征","type":"knowledge","status":"unlearned","id":"yy_024","parentModule":"言语理解与表达","parentSubModule":"片段阅读","category":"细节判断题"}
+      ]
+    }
+  ],
+  "knowledgePoints": []
+}
