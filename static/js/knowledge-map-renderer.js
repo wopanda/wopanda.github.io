@@ -85,31 +85,30 @@ class KnowledgeMapRenderer {
      * 后台刷新网络数据，若版本或数据更新则轻量重渲染
      */
     async refreshFromNetwork() {
-        const oldVersion = this.metadata && this.metadata.version;
+        // 始终刷新后重渲染，避免版本未变导致的数据不更新
         await this.loadDataFromNetwork();
-        const newVersion = this.metadata && this.metadata.version;
-        if (oldVersion !== newVersion) {
-            // 版本变化时重渲染
-            this.render();
-            this.addProgressIndicator();
-        }
+        this.render();
+        this.addProgressIndicator();
     }
 
     /**
      * 从网络加载所有模块数据（含版本参数，利于缓存）
      */
     async loadDataFromNetwork() {
-        // 先加载元数据以获取模块列表
-        const metadataResponse = await fetch('/data/knowledge/_metadata.json', { cache: 'force-cache' });
+        // 先加载元数据以获取模块列表（禁用HTTP缓存并添加时间戳）
+        const ts = Date.now();
+        const metadataResponse = await fetch(`/data/knowledge/_metadata.json?ts=${ts}`, { cache: 'no-store' });
         const meta = await metadataResponse.json();
         this.metadata = meta;
         try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
 
-        const versionSuffix = meta && meta.version ? `?v=${encodeURIComponent(meta.version)}` : '';
+        const vs = (meta && (meta.version || meta.lastUpdate))
+            ? `?v=${encodeURIComponent(meta.version || '')}&lu=${encodeURIComponent(meta.lastUpdate || '')}&ts=${ts}`
+            : `?ts=${ts}`;
 
-        // 并行加载所有模块数据
+        // 并行加载所有模块数据（禁用HTTP缓存）
         const loadPromises = (meta.modules || []).map(async moduleName => {
-            const response = await fetch(`/data/knowledge/${moduleName}.json${versionSuffix}`, { cache: 'force-cache' });
+            const response = await fetch(`/data/knowledge/${moduleName}.json${vs}`, { cache: 'no-store' });
             const moduleData = await response.json();
             this.knowledgeData[moduleName] = moduleData;
             try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
@@ -122,7 +121,8 @@ class KnowledgeMapRenderer {
      * 仅加载元数据（用于首次访问时尽快渲染骨架屏）
      */
     async loadMetadataOnly() {
-        const metadataResponse = await fetch('/data/knowledge/_metadata.json', { cache: 'force-cache' });
+        const ts = Date.now();
+        const metadataResponse = await fetch(`/data/knowledge/_metadata.json?ts=${ts}`, { cache: 'no-store' });
         const meta = await metadataResponse.json();
         this.metadata = meta;
         try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
@@ -133,14 +133,30 @@ class KnowledgeMapRenderer {
      */
     async loadModulesFromNetwork() {
         const meta = this.metadata || { modules: [] };
-        const versionSuffix = meta && meta.version ? `?v=${encodeURIComponent(meta.version)}` : '';
+        const ts = Date.now();
+        const vs = (meta && (meta.version || meta.lastUpdate))
+            ? `?v=${encodeURIComponent(meta.version || '')}&lu=${encodeURIComponent(meta.lastUpdate || '')}&ts=${ts}`
+            : `?ts=${ts}`;
         const loadPromises = (meta.modules || []).map(async moduleName => {
-            const response = await fetch(`/data/knowledge/${moduleName}.json${versionSuffix}`, { cache: 'force-cache' });
+            const response = await fetch(`/data/knowledge/${moduleName}.json${vs}`, { cache: 'no-store' });
             const moduleData = await response.json();
             this.knowledgeData[moduleName] = moduleData;
             try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
         });
         await Promise.all(loadPromises);
+    }
+
+    /**
+     * 清空本地缓存并强制刷新页面
+     */
+    clearCachesAndReload() {
+        try {
+            const keys = Object.keys(localStorage);
+            keys.forEach(k => { if (k.startsWith('km_')) localStorage.removeItem(k); });
+        } catch (_) {}
+        const url = new URL(window.location.href);
+        url.searchParams.set('ts', Date.now().toString());
+        window.location.replace(url.toString());
     }
 
     /**
@@ -300,8 +316,18 @@ class KnowledgeMapRenderer {
             }
         }
 
+        // 清空缓存按钮
+        const actions = document.createElement('div');
+        actions.className = 'km-actions';
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'km-clear-cache-btn';
+        clearBtn.textContent = '清空缓存并刷新';
+        clearBtn.addEventListener('click', () => this.clearCachesAndReload());
+        actions.appendChild(clearBtn);
+
         toolbar.appendChild(titleArea);
         toolbar.appendChild(statsArea);
+        toolbar.appendChild(actions);
         this.container.appendChild(toolbar);
         
         // 将渲染器实例保存到容器上，方便回调
