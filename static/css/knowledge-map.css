@@ -687,9 +687,10 @@
   }
   
   .km-territory-header {
-    position: static; /* 移动端改为常规流布局，避免与网格重叠 */
-    top: auto;
-    left: auto;
+    position: relative !important; /* 强制取消绝对定位，避免与网格重叠 */
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
     margin: 8px 16px 0 16px;
     max-width: 100%;
   }
@@ -744,9 +745,10 @@
   }
   
   .km-territory-header {
-    position: static;
-    top: auto;
-    left: auto;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
     margin: 8px 12px 0 12px;
     max-width: 100%;
   }
