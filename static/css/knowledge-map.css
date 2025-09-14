@@ -364,6 +364,33 @@
   padding: 12px 12px 12px 12px;
 }
 
+/* 骨架屏样式：降低首次显示的“加载中”感知 */
+.km-skeleton {
+  position: relative;
+  overflow: hidden;
+}
+.km-skeleton-title::after,
+.km-skeleton-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 100%);
+  animation: km-shimmer 1.4s infinite;
+}
+.km-skeleton-title {
+  color: transparent !important;
+  min-height: 18px;
+}
+.km-skeleton-grid {
+  min-height: 120px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+}
+@keyframes km-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 .km-territory-title {
   color: white;
   font-size: 0.95rem;

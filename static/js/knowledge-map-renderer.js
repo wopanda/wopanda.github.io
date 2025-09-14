@@ -28,8 +28,18 @@ class KnowledgeMapRenderer {
         }
 
         try {
-            await this.loadData();
-            this.render();
+            // 先尝试用本地缓存进行即时渲染，再后台刷新网络数据
+            const hadCache = this.loadFromCache();
+            if (hadCache) {
+                this.render();
+                this.refreshFromNetwork();
+            } else {
+                // 首次访问：先加载元数据并渲染骨架，再并行加载模块数据，完成后无动画替换
+                await this.loadMetadataOnly();
+                this.renderSkeleton();
+                await this.loadModulesFromNetwork();
+                this.render();
+            }
             this.addProgressIndicator();
             // 响应式：窗口尺寸变化时，轻量防抖后重新渲染以适配移动端布局
             window.addEventListener('resize', () => {
@@ -39,6 +49,135 @@ class KnowledgeMapRenderer {
         } catch (error) {
             console.error('知识地图初始化失败:', error);
             this.showError('加载知识地图时出现错误');
+        }
+    }
+
+    /**
+     * 尝试从本地缓存加载数据
+     */
+    loadFromCache() {
+        try {
+            const metaStr = localStorage.getItem('km_meta');
+            if (!metaStr) return false;
+            const meta = JSON.parse(metaStr);
+            if (!meta || !Array.isArray(meta.modules)) return false;
+            this.metadata = meta;
+            let loadedAny = false;
+            meta.modules.forEach(name => {
+                const key = `km_mod_${name}`;
+                const modStr = localStorage.getItem(key);
+                if (!modStr) return;
+                try {
+                    const mod = JSON.parse(modStr);
+                    if (mod) {
+                        this.knowledgeData[name] = mod;
+                        loadedAny = true;
+                    }
+                } catch (_) {}
+            });
+            return loadedAny;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    /**
+     * 后台刷新网络数据，若版本或数据更新则轻量重渲染
+     */
+    async refreshFromNetwork() {
+        const oldVersion = this.metadata && this.metadata.version;
+        await this.loadDataFromNetwork();
+        const newVersion = this.metadata && this.metadata.version;
+        if (oldVersion !== newVersion) {
+            // 版本变化时重渲染
+            this.render();
+            this.addProgressIndicator();
+        }
+    }
+
+    /**
+     * 从网络加载所有模块数据（含版本参数，利于缓存）
+     */
+    async loadDataFromNetwork() {
+        // 先加载元数据以获取模块列表
+        const metadataResponse = await fetch('/data/knowledge/_metadata.json', { cache: 'force-cache' });
+        const meta = await metadataResponse.json();
+        this.metadata = meta;
+        try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
+
+        const versionSuffix = meta && meta.version ? `?v=${encodeURIComponent(meta.version)}` : '';
+
+        // 并行加载所有模块数据
+        const loadPromises = (meta.modules || []).map(async moduleName => {
+            const response = await fetch(`/data/knowledge/${moduleName}.json${versionSuffix}`, { cache: 'force-cache' });
+            const moduleData = await response.json();
+            this.knowledgeData[moduleName] = moduleData;
+            try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
+        });
+
+        await Promise.all(loadPromises);
+    }
+
+    /**
+     * 仅加载元数据（用于首次访问时尽快渲染骨架屏）
+     */
+    async loadMetadataOnly() {
+        const metadataResponse = await fetch('/data/knowledge/_metadata.json', { cache: 'force-cache' });
+        const meta = await metadataResponse.json();
+        this.metadata = meta;
+        try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
+    }
+
+    /**
+     * 仅加载模块数据（在元数据已加载的前提下）
+     */
+    async loadModulesFromNetwork() {
+        const meta = this.metadata || { modules: [] };
+        const versionSuffix = meta && meta.version ? `?v=${encodeURIComponent(meta.version)}` : '';
+        const loadPromises = (meta.modules || []).map(async moduleName => {
+            const response = await fetch(`/data/knowledge/${moduleName}.json${versionSuffix}`, { cache: 'force-cache' });
+            const moduleData = await response.json();
+            this.knowledgeData[moduleName] = moduleData;
+            try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
+        });
+        await Promise.all(loadPromises);
+    }
+
+    /**
+     * 渲染骨架屏（基于元数据的模块名先展示占位，减少“加载中”时间感知）
+     */
+    renderSkeleton() {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth <= 768;
+        this.container.innerHTML = '';
+        this.renderToolbar();
+        const main = document.createElement('div');
+        main.className = 'km-main-content';
+        const map = document.createElement('div');
+        map.className = 'km-battle-map';
+        const frag = document.createDocumentFragment();
+        const modules = (this.metadata && this.metadata.modules) || [];
+        modules.forEach(name => {
+            const territory = document.createElement('div');
+            territory.className = 'km-territory km-skeleton';
+            const header = document.createElement('div');
+            header.className = 'km-territory-header';
+            const title = document.createElement('div');
+            title.className = 'km-territory-title km-skeleton-title';
+            title.textContent = name;
+            header.appendChild(title);
+            const grid = document.createElement('div');
+            grid.className = 'km-territory-grid km-skeleton-grid';
+            territory.appendChild(header);
+            territory.appendChild(grid);
+            frag.appendChild(territory);
+        });
+        map.appendChild(frag);
+        main.appendChild(map);
+        this.container.appendChild(main);
+        if (reduceMotion) {
+            this.container.style.transition = 'none';
+            this.container.style.opacity = '1';
+            this.container.style.transform = 'none';
         }
     }
 
@@ -67,26 +206,36 @@ class KnowledgeMapRenderer {
         // 切换视图前，清理遗留的全局 tooltip
         this.clearAllTooltips();
 
-        // 添加淡出动画
-        this.container.style.opacity = '0';
-        this.container.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth <= 768;
+        if (!reduceMotion) {
+            // 添加淡出动画
+            this.container.style.opacity = '0';
+            this.container.style.transform = 'translateY(20px)';
+        }
+
+        const doRender = () => {
             this.container.innerHTML = '';
-            
-            // 创建工具栏
             this.renderToolbar();
-            
-            // 创建主内容区域
             this.renderMainContent();
-            
-            // 添加淡入动画
-            requestAnimationFrame(() => {
-                this.container.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            if (!reduceMotion) {
+                requestAnimationFrame(() => {
+                    this.container.style.transition = 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)';
+                    this.container.style.opacity = '1';
+                    this.container.style.transform = 'translateY(0)';
+                });
+            } else {
+                this.container.style.transition = 'none';
                 this.container.style.opacity = '1';
-                this.container.style.transform = 'translateY(0)';
-            });
-        }, 150);
+                this.container.style.transform = 'none';
+            }
+        };
+
+        if (!reduceMotion) {
+            // 微小延时让过渡更平滑，但不阻塞
+            requestAnimationFrame(doRender);
+        } else {
+            doRender();
+        }
     }
 
     // 移除页面上所有 tooltip（防止从全局切到模块后仍悬浮）
@@ -293,10 +442,12 @@ class KnowledgeMapRenderer {
             return bCount - aCount;
         });
 
-        // 渲染每个模块的"领土"
+        // 渲染每个模块的"领土"（使用 DocumentFragment 减少多次回流）
+        const frag = document.createDocumentFragment();
         sortedModules.forEach(module => {
-            this.renderModuleTerritory(battleMapContainer, module);
+            this.renderModuleTerritory(frag, module);
         });
+        battleMapContainer.appendChild(frag);
 
         container.appendChild(battleMapContainer);
     }
@@ -352,19 +503,15 @@ class KnowledgeMapRenderer {
         pointsGrid.style.gridTemplateColumns = `repeat(${gridCols}, 1fr)`;
         pointsGrid.style.gridTemplateRows = `repeat(${gridRows}, 1fr)`;
         
-        // 渲染每个知识点为网格块
+        // 渲染每个知识点为网格块（字符串拼接提升创建速度）
+        let cellsHtml = '';
         for (let i = 0; i < totalPoints; i++) {
-            const point = allPoints[i];
-            if (point) {
-                const gridCell = document.createElement('div');
-                gridCell.className = `km-grid-cell status-${point.status}`;
-                // 为事件委托提供数据
-                gridCell.dataset.name = point.name;
-                gridCell.dataset.status = point.status;
-                if (point.parentSubModule) gridCell.dataset.parentSubModule = point.parentSubModule;
-                pointsGrid.appendChild(gridCell);
-            }
+            const p = allPoints[i];
+            if (!p) continue;
+            const parentAttr = p.parentSubModule ? ` data-parent-sub-module="${this.escapeAttr(p.parentSubModule)}"` : '';
+            cellsHtml += `<div class="km-grid-cell status-${this.escapeAttr(p.status)}" data-name="${this.escapeAttr(p.name)}" data-status="${this.escapeAttr(p.status)}"${parentAttr}></div>`;
         }
+        pointsGrid.innerHTML = cellsHtml;
         
         // 事件委托：指针悬停/离开/点击统一处理 tooltip
         pointsGrid.addEventListener('pointerover', (e) => {
@@ -856,6 +1003,17 @@ class KnowledgeMapRenderer {
         document.title = `知识地图 (${progressPercentage}%) - 公考小饭团`;
         
         // 可以在这里添加更多的进度指示器
+    }
+
+    /**
+     * 安全转义到HTML属性
+     */
+    escapeAttr(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 
     /**
