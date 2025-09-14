@@ -15,6 +15,9 @@ class KnowledgeMapRenderer {
         this._tooltipEl = null;
         this._tooltipTimer = null;
         this._resizeTimer = null;
+        this._lastResize = { w: 0, h: 0 };
+        this._lastRenderAt = 0;
+        this._lastProgressPct = null;
     }
 
     /**
@@ -28,68 +31,36 @@ class KnowledgeMapRenderer {
         }
 
         try {
-            // 先尝试用本地缓存进行即时渲染，再后台刷新网络数据
-            const hadCache = this.loadFromCache();
-            if (hadCache) {
-                this.render();
-                this.refreshFromNetwork();
-            } else {
-                // 首次访问：先加载元数据并渲染骨架，再并行加载模块数据，完成后无动画替换
-                await this.loadMetadataOnly();
-                this.renderSkeleton();
-                await this.loadModulesFromNetwork();
-                this.render();
-            }
+            // 始终走网络：先加载元数据并渲染骨架，再并行加载模块数据，完成后替换
+            await this.loadMetadataOnly();
+            this.renderSkeleton();
+            await this.loadModulesFromNetwork();
+            this.render();
             this.addProgressIndicator();
-            // 响应式：窗口尺寸变化时，轻量防抖后重新渲染以适配移动端布局
+            // 响应式：窗口尺寸变化时，仅在显著尺寸变化且间隔足够时重渲染
+            this._lastResize = { w: window.innerWidth, h: window.innerHeight };
             window.addEventListener('resize', () => {
+                const now = performance.now();
+                const minIntervalMs = 400;
+                const widthDelta = Math.abs(window.innerWidth - this._lastResize.w);
+                const heightDelta = Math.abs(window.innerHeight - this._lastResize.h);
+                const widthThreshold = 40;  // 地址栏折叠引起的小抖动直接忽略
+                const heightThreshold = 120;
+                if (now - this._lastRenderAt < minIntervalMs) return;
+                if (widthDelta < widthThreshold && heightDelta < heightThreshold) return;
+                this._lastResize = { w: window.innerWidth, h: window.innerHeight };
                 clearTimeout(this._resizeTimer);
-                this._resizeTimer = setTimeout(() => this.render(), 200);
-            });
+                this._resizeTimer = setTimeout(() => {
+                    this.render();
+                }, 100);
+            }, { passive: true });
         } catch (error) {
             console.error('知识地图初始化失败:', error);
             this.showError('加载知识地图时出现错误');
         }
     }
 
-    /**
-     * 尝试从本地缓存加载数据
-     */
-    loadFromCache() {
-        try {
-            const metaStr = localStorage.getItem('km_meta');
-            if (!metaStr) return false;
-            const meta = JSON.parse(metaStr);
-            if (!meta || !Array.isArray(meta.modules)) return false;
-            this.metadata = meta;
-            let loadedAny = false;
-            meta.modules.forEach(name => {
-                const key = `km_mod_${name}`;
-                const modStr = localStorage.getItem(key);
-                if (!modStr) return;
-                try {
-                    const mod = JSON.parse(modStr);
-                    if (mod) {
-                        this.knowledgeData[name] = mod;
-                        loadedAny = true;
-                    }
-                } catch (_) {}
-            });
-            return loadedAny;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    /**
-     * 后台刷新网络数据，若版本或数据更新则轻量重渲染
-     */
-    async refreshFromNetwork() {
-        // 始终刷新后重渲染，避免版本未变导致的数据不更新
-        await this.loadDataFromNetwork();
-        this.render();
-        this.addProgressIndicator();
-    }
+    // 取消本地缓存路径：所有数据统一走网络
 
     /**
      * 从网络加载所有模块数据（含版本参数，利于缓存）
@@ -100,7 +71,6 @@ class KnowledgeMapRenderer {
         const metadataResponse = await fetch(`/data/knowledge/_metadata.json?ts=${ts}`, { cache: 'no-store' });
         const meta = await metadataResponse.json();
         this.metadata = meta;
-        try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
 
         const vs = (meta && (meta.version || meta.lastUpdate))
             ? `?v=${encodeURIComponent(meta.version || '')}&lu=${encodeURIComponent(meta.lastUpdate || '')}&ts=${ts}`
@@ -111,7 +81,6 @@ class KnowledgeMapRenderer {
             const response = await fetch(`/data/knowledge/${moduleName}.json${vs}`, { cache: 'no-store' });
             const moduleData = await response.json();
             this.knowledgeData[moduleName] = moduleData;
-            try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
         });
 
         await Promise.all(loadPromises);
@@ -125,7 +94,6 @@ class KnowledgeMapRenderer {
         const metadataResponse = await fetch(`/data/knowledge/_metadata.json?ts=${ts}`, { cache: 'no-store' });
         const meta = await metadataResponse.json();
         this.metadata = meta;
-        try { localStorage.setItem('km_meta', JSON.stringify(meta)); } catch (_) {}
     }
 
     /**
@@ -141,7 +109,6 @@ class KnowledgeMapRenderer {
             const response = await fetch(`/data/knowledge/${moduleName}.json${vs}`, { cache: 'no-store' });
             const moduleData = await response.json();
             this.knowledgeData[moduleName] = moduleData;
-            try { localStorage.setItem(`km_mod_${moduleName}`, JSON.stringify(moduleData)); } catch (_) {}
         });
         await Promise.all(loadPromises);
     }
@@ -233,6 +200,7 @@ class KnowledgeMapRenderer {
             this.container.innerHTML = '';
             this.renderToolbar();
             this.renderMainContent();
+            this._lastRenderAt = performance.now();
             if (!reduceMotion) {
                 requestAnimationFrame(() => {
                     this.container.style.transition = 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -1013,10 +981,12 @@ class KnowledgeMapRenderer {
      */
     addProgressIndicator() {
         const stats = this.calculateGlobalStats();
-        const progressPercentage = Math.round((stats.learned / stats.total) * 100);
-        
-        // 更新页面标题
-        document.title = `知识地图 (${progressPercentage}%) - 公考小饭团`;
+        const progressPercentage = Math.round((stats.learned / Math.max(1, stats.total)) * 100);
+        // 仅在变化时更新，避免频繁闪烁
+        if (this._lastProgressPct !== progressPercentage) {
+            document.title = `知识地图 (${progressPercentage}%) - 公考小饭团`;
+            this._lastProgressPct = progressPercentage;
+        }
         
         // 可以在这里添加更多的进度指示器
     }
@@ -1046,4 +1016,4 @@ class KnowledgeMapRenderer {
 
 // 确保在全局范围内可用
 window.KnowledgeMapRenderer = KnowledgeMapRenderer;
-/* 强制刷新缓存 - 09/14/2025 20:47:30 */
+/* 统一网络加载，无本地缓存 - 09/14/2025 21:20 */

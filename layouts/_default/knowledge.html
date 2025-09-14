@@ -21,9 +21,10 @@
 
 </article>
 
-<!-- 引入知识地图的CSS和JS -->
-<link rel="stylesheet" href="/css/knowledge-map.css">
-<script src="/js/knowledge-map-renderer.js"></script>
+<!-- 引入知识地图的CSS和JS（附带版本参数，避免缓存） -->
+{{- $ver := (now.Unix) -}}
+<link rel="stylesheet" href="/css/knowledge-map.css?v={{$ver}}">
+<script src="/js/knowledge-map-renderer.js?v={{$ver}}"></script>
 <script>
   // 页面加载完成后初始化知识地图
   document.addEventListener('DOMContentLoaded', function() {
