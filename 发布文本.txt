@@ -1,1 +1,1 @@
-.\deploy.bat "你的提交信息"
+.\deploy.bat "更新"

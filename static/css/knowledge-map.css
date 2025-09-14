@@ -697,7 +697,7 @@
   }
   
   .km-territory-grid {
-    padding: 40px 16px 16px 16px;
+    padding: 56px 16px 16px 16px; /* 增加顶部留白，避免标题与格子重叠 */
     gap: 4px;
   }
   
@@ -737,7 +737,7 @@
   }
   
   .km-territory-grid {
-    padding: 20px 12px 12px 12px;
+    padding: 60px 12px 12px 12px; /* 小屏进一步增加顶部间距 */
   }
 }
 
