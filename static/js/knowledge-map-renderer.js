@@ -316,18 +316,8 @@ class KnowledgeMapRenderer {
             }
         }
 
-        // 清空缓存按钮
-        const actions = document.createElement('div');
-        actions.className = 'km-actions';
-        const clearBtn = document.createElement('button');
-        clearBtn.className = 'km-clear-cache-btn';
-        clearBtn.textContent = '清空缓存并刷新';
-        clearBtn.addEventListener('click', () => this.clearCachesAndReload());
-        actions.appendChild(clearBtn);
-
         toolbar.appendChild(titleArea);
         toolbar.appendChild(statsArea);
-        toolbar.appendChild(actions);
         this.container.appendChild(toolbar);
         
         // 将渲染器实例保存到容器上，方便回调
