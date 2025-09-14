@@ -18,7 +18,7 @@
         {"name":"对称性","type":"knowledge","status":"learned","id":"lj_010","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
         {"name":"曲直性","type":"knowledge","status":"learned","id":"lj_011","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
         {"name":"开闭性","type":"knowledge","status":"learned","id":"lj_012","parentModule":"判断推理","parentSubModule":"图形推理","category":"属性规律"},
-        {"name":"面","type":"knowledge","status":"learned","id":"lj_013","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
+        {"name":"面","type":"knowledge","status":"unlearned","id":"lj_013","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
         {"name":"线","type":"knowledge","status":"unlearned","id":"lj_014","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
         {"name":"点","type":"knowledge","status":"unlearned","id":"lj_015","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
         {"name":"角","type":"knowledge","status":"unlearned","id":"lj_016","parentModule":"判断推理","parentSubModule":"图形推理","category":"数量规律"},
