@@ -351,6 +351,19 @@
   white-space: nowrap;
 }
 
+/* 移动端专用：当容器有 km-mobile 类时，标题进入文流并增加分隔 */
+.km-territory.km-mobile .km-territory-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 8px 12px 0 12px;
+  max-width: 100%;
+}
+
+.km-territory.km-mobile .km-territory-grid {
+  padding: 12px 12px 12px 12px;
+}
+
 .km-territory-title {
   color: white;
   font-size: 0.95rem;

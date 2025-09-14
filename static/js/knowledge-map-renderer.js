@@ -14,6 +14,7 @@ class KnowledgeMapRenderer {
         // 单例 tooltip 相关
         this._tooltipEl = null;
         this._tooltipTimer = null;
+        this._resizeTimer = null;
     }
 
     /**
@@ -30,6 +31,11 @@ class KnowledgeMapRenderer {
             await this.loadData();
             this.render();
             this.addProgressIndicator();
+            // 响应式：窗口尺寸变化时，轻量防抖后重新渲染以适配移动端布局
+            window.addEventListener('resize', () => {
+                clearTimeout(this._resizeTimer);
+                this._resizeTimer = setTimeout(() => this.render(), 200);
+            });
         } catch (error) {
             console.error('知识地图初始化失败:', error);
             this.showError('加载知识地图时出现错误');
@@ -374,6 +380,23 @@ class KnowledgeMapRenderer {
         }, { passive: true });
 
         pointsGrid.addEventListener('click', () => this.hideTooltip(), { passive: true });
+
+        // 移动端专用布局：标题进入文流并与网格分隔，避免重叠
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) {
+            territory.classList.add('km-mobile');
+            header.style.position = 'relative';
+            header.style.top = '0';
+            header.style.left = '0';
+            header.style.margin = '8px 12px 0 12px';
+            header.style.maxWidth = '100%';
+            pointsGrid.style.paddingTop = '12px';
+        } else {
+            territory.classList.remove('km-mobile');
+            // 清理内联样式，防止从移动端切回桌面端后残留
+            header.removeAttribute('style');
+            pointsGrid.style.paddingTop = '';
+        }
 
         territory.appendChild(pointsGrid);
         container.appendChild(territory);
