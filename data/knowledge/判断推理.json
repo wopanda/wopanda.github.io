@@ -81,7 +81,7 @@
         {
           "name": "面",
           "type": "knowledge",
-          "status": "unlearned",
+          "status": "learned",
           "id": "lj_010",
           "parentModule": "判断推理",
           "parentSubModule": "图形推理"
