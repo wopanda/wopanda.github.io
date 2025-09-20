@@ -20,7 +20,7 @@
     {
       "name": "乘积增长率",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_003",
       "parentModule": "资料分析"
     },
@@ -34,7 +34,7 @@
     {
       "name": "隔年增长率",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_005",
       "parentModule": "资料分析"
     },
@@ -62,7 +62,7 @@
     {
       "name": "基期量",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_009",
       "parentModule": "资料分析"
     },
@@ -76,7 +76,7 @@
     {
       "name": "年均增长率",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_011",
       "parentModule": "资料分析"
     },
@@ -125,7 +125,7 @@
     {
       "name": "一般增长率",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_018",
       "parentModule": "资料分析"
     },
@@ -146,7 +146,7 @@
     {
       "name": "增长量",
       "type": "knowledge",
-      "status": "unlearned",
+      "status": "learned",
       "id": "zl_021",
       "parentModule": "资料分析"
     },
